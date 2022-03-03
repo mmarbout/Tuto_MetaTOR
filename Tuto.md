@@ -100,15 +100,13 @@ If give you some binning plot summary too:
 
 |Bins completion/contamination distribution|Bins size quality distribution|
 |:-:|:-:|
-|![bins_distribution](docs/example/images/bins_distribution.png) | ![bins_size_distribution](images/bins_size_distribution.png)|
+|![bins_distribution](docs/example/images/bins_distribution.png) | ![bins_size_distribution](docs/example/images/bins_size_distribution.png)|
 
 Another plot is the heatmap of the final bin network. It display the integrity inside a MAG and the noise between MAGs. All the bins of more than 500kb are represented. The order of the bins is the same as in the bin_summary.txt file. The binning size is 50kb.
 
 ![network_heatmap](docs/example/images/network_heatmap.png)
 
 ## B. A multiple modules pipeline
-
-This command will take some time as the Software will run all the steps with this. For the 140,409 contigs assembly example (314Mb) with 56 millions reads with 16 threads, it will take around 74.2 minutes and up to around 40G memory usage (CheckM validation step). However it's possible to skip some step if you don't need them or you have already done them to speed up the process.
 
 ### 1. Choose your starting point
 
@@ -160,21 +158,7 @@ metator validation -c contig_data_partition.txt -n network.txt -a assembly.fa -f
 
 ## C. Advanced parameters
 
-### 1. Digestion site
-
-The reads came from a metaHiC experiment where different restriction enzyme could have been used. MetaTOR is able to integrate in the contig data information the number of restriction sites of each contigs.
-
-**Normalization**: As HiC coverage depends on the density of restriction site, this data could be useful for normalization method using model based on the coverage of the contigs. The default normalization does not need it as we do not train any model and just use the geometric mean of the intra-contig contacts to normalize the inter-contig contacts. Indeed, we expect the number of intra-contig contacts to depends on the size, the restriction site density and the abundance of contig as the inter-contigs contacts.
-
-**Ligation sites**: The restriction enzyme could also be used to preprocess the reads. Indeed, HiC reads could be chimeric, i.e. an ligation event could occur inside one read. If a ligation event occur in the reads, the aligner will only map the biggest half of the read and assign a bad mapping quality on the read. To avoid to loose these reads it's possible to use an iterative alignment (start with only 20 first bases of the reads and add iteratively 20bp until the read is mapped, or maximum length is reached). Another possibility is to first preprocess the reads by cutting them on the ligation sites. For example, for HpaII, the restriction site is CCG and the ligation site will CCGCGG. Furthermore,CCGCGG if a ligation event is detected it's possible to create two pairs from the previous one with each part of the cutting read. This preprocess is especially useful with "long" PE sequencing (2x100bp or longer) and if the restriction sites density is high (1 every 100bp). A module to preprocess the data is available in [hicstuff](https://github.com/koszullab/hicstuff) [[4]](#References):
-
-```sh
-hicstuff digest -1 hic_reads_for.fastq.gz -2 hic_reads_for.fastq.gz  -p hic_reads_cutsite -e HpaII
-```
-
-The module returns two new digested fastq with prefix given (here hic_reads_cutsite), which could be use as input data. In this example the preprocess haven't been done as the HiC reads are only 2x35bp.
-
-### 2. Binning parameters
+### 1. Binning parameters
 
 A lot of parameters could be modify to optimize the binning at your own datasets. The default parameters aare the one which usually give the best results. However, depending on your datasets and if you want to do a manual cleaning step to decontaminate your MAGs, some parameters could be optimize.
 
