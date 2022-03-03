@@ -1,6 +1,6 @@
 # Tutorial MetaTOR
 
-In this notebook we will give an example on how to run MetaTOR [[1]](#References) in order to bin metganomics assembly into MAGs and explain the output of the pipeline.
+In this notebook we will give an example on how to run MetaTOR in order to bin a small metganomics assembly into MAGs and explain the output of the pipeline.
 
 ## Table of contents
 
@@ -20,29 +20,15 @@ In this notebook we will give an example on how to run MetaTOR [[1]](#References
 
 ## Input data
 
-In this analysis, we will use the metaHiC sample from [Marbouty *et al.*, eLife, 2021](https://elifesciences.org/articles/60608). The accession number of the fastq sequences is SRR13435231 and the assembly accession number is ASM1314648v1 in the BioProject PRJNA627086 on the NCBI database:
+In this analysis, we will use a simple bacterial community ranging from stool samples from gnotobiotic mice (OligoMM12) 
 
-* Forward metaHiC reads: hic_reads_for.fastq.gz
-* Reverse metaHiC reads: hic_reads_rev.fastq.gz
-* Assembly sequences: assembly.fa
+Here the assembly has been made using ShotGun sequences (PE Illumina sequencing: 2x75bp, NextSeq500). Before building the assembly reads were filtered and trimmed using Cutadapt (v1.9.1). Here the assembly have been build using Megahit (v1.1.1.2) with default paramters.
 
-Here the assembly has been made using proximity ligation library (PE Illumina sequencing: 2x75bp, NextSeq500). Before building the assembly reads were filtered and trimmed using Cutadapt (v1.9.1). Here the assembly have been build using Megahit (v1.1.1.2) with default paramters.
+the assembly can be found here : XXXX
 
-However, it's better to use a short reads (PE reads shotgun) library to build a better assembly. For example, you can use [Megahit](https://github.com/voutcn/megahit) (v1.2.9) or [Spades](https://github.com/ablab/spades) (v3.15.2) as below to build your own assembly of your sample.  
+in order to perform the binning based on 3D contact, we also need Hi-C dataset from the same sample.
 
-Using Megahit [[2]](#References):
-
-```sh
-megahit -1 shotgun_reads_for.fastq.gz -2 shotgun_reads_rev.fastq.gz -o assembly.fa --min-contig-len 500 
-```
-
-Using Spades [[3]](#References) (more advanced tutorial is available [here](https://currentprotocols.onlinelibrary.wiley.com/doi/full/10.1002/cpbi.102)):
-
-```sh
-metaspades.py 1 shotgun_reads_for.fastq.gz -2 shotgun_reads_rev.fastq.gz -o assembly_folder
-```
-
-For Spades assembly we advise to set a minimum contig length threshold of 500bp as MetaTOR won't be able to bin efficiently smaller contigs.
+FastQ Hi-C PE reads can be found here : XXXX
 
 ## A. Quick start
 
