@@ -100,11 +100,11 @@ If give you some binning plot summary too:
 
 |Bins completion/contamination distribution|Bins size quality distribution|
 |:-:|:-:|
-|![bins_distribution](images/bins_distribution.png) | ![bins_size_distribution](images/bins_size_distribution.png)|
+|![bins_distribution](docs/example/images/bins_distribution.png) | ![bins_size_distribution](images/bins_size_distribution.png)|
 
 Another plot is the heatmap of the final bin network. It display the integrity inside a MAG and the noise between MAGs. All the bins of more than 500kb are represented. The order of the bins is the same as in the bin_summary.txt file. The binning size is 50kb.
 
-![network_heatmap](images/network_heatmap.png)
+![network_heatmap](docs/example/images/network_heatmap.png)
 
 ## B. A multiple modules pipeline
 
@@ -112,7 +112,7 @@ This command will take some time as the Software will run all the steps with thi
 
 ### 1. Choose your starting point
 
-![metator_pipeline_figures](images/metator_figures_modules.png)
+![metator_pipeline_figures](docs/example/images/metator_figures_modules.png)
 
 One of the longest step is the alignemnent of the reads and the computation of the pairs file. Moreover, currently metaTOR use only bowtie2 to do the alignment with the --very-sensitive-local parameters to align the reads. You may already have a bam or a pairs file from another anlysis, or just want to use another aligner software, or different parameters of bowtie2. That's why it's possible to start at different stage with the `--start` parameter. There are four possible start:
 
@@ -178,7 +178,7 @@ The module returns two new digested fastq with prefix given (here hic_reads_cuts
 
 A lot of parameters could be modify to optimize the binning at your own datasets. The default parameters aare the one which usually give the best results. However, depending on your datasets and if you want to do a manual cleaning step to decontaminate your MAGs, some parameters could be optimize.
 
-![metator_binning](images/metator_figures_param.png)
+![metator_binning](docs/example/images/metator_figures_param.png)
 
 #### a. Alignment
 
