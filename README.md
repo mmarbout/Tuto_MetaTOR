@@ -3,12 +3,12 @@
 Practical course to learn how to use MetaTOR piepline and Hi-C data for binning of metagenomic assemblies.
 
 
-
 ## Table of contents
 
 * [MetaTOR](#MetaTOR)
 * [Dataset](#Dataset)
 * [Usage](#Usage)
+* [End-to-End pipeline](#End-to-End-pipeline)
 * [Output files](#Output-files)
 * [References](#References)
 * [Contact](#Contact)
@@ -35,14 +35,14 @@ Principle of MetaTOR pipeline:
 The different data needed to perform the practical course can be found at the following path:
 
 ```sh
-    ls -l /opt/metagenomics/tp3/
+   ls -l /opt/metagenomics/tp3/
 ```
 
-First, you will need to get the data (FastQ files, Assembly, Louvain algorithm…) and provide authorization for the Louvain executable.
-
-In your workspace, copy/paste the following lines:
+The folder contain the FastQ files and the assembly of the studied Metagenome. This is a simple metagenomic dataset ranging from a mice fecal sample with a defined community.
 
 ## Usage
+
+MetaTOR is a modular piepline allowing to perform each step separetly or in end to end pipeline
 
 ```sh
     metator {network|partition|validation|pipeline} [parameters]
@@ -68,6 +68,28 @@ There are a number of other, optional, miscellaneous actions:
 
 * `help` : display help message.
 
+## End-to-End pipeline
+
+using the provided dataset, you can launch the whole pipeline. You will skeep the validation step as checkM is a very consuming software (40 Go RAM) unable to run on your VM.
+
+```sh
+    metator pipeline -v -F -i 10 -a /opt/metagenomics/tp3/ass_tuto.fa -1 /opt/metagenomics/tp3/Tuto_for.fastq.gz -2 /opt/metagenomics/tp3/Tuto_rev.fastq.gz -o Meta3C
+```
+
+MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis.
+
+you can restart the pipeline by varying the number of iterations of the louvain algorithm.
+
+## Output files
+
+As we have launch the pileine without the checkM validation, the output files are not complete.
+
+You will find the complete output files at the following path:
+
+```sh
+   ls -l /opt/metagenomics/tp3/output_Tuto/
+```
+
 
 ## References
 
@@ -80,8 +102,6 @@ There are a number of other, optional, miscellaneous actions:
 ### Authors
 
 * amaury.bignaud@pasteur.fr
-* lyam.baudry@pasteur.fr
-* thfoutel@pasteur.fr
 * martial.marbouty@pasteur.fr
 * romain.koszul@pasteur.fr
 
