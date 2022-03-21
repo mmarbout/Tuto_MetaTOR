@@ -1,7 +1,6 @@
 # Tuto_MetaTOR
 
-Practical course to learn how to use MetaTOR piepline and Hi-C data for binning of metagenomic assemblies.
-
+For this session we will learn how to use 3C/Hi-C data and MEtaTOR to perform the binning of a simple metagenome. The data come from a fecal sample from the mice oligoMM.
 
 ## Table of contents
 
