@@ -32,13 +32,19 @@ Principle of MetaTOR pipeline:
 
 ## Dataset
 
+first of all, you will need to provide the PATH to the clustering algorithm. In our case we will use the louvain algorithm.
+
+```sh
+   export LOUVAIN_PATH=/opt/metagenomics/tp3/gen-louvain/
+```
+
 The different data needed to perform the practical course can be found at the following path:
 
 ```sh
    ls -l /opt/metagenomics/tp3/
 ```
 
-The folder contain the FastQ files and the assembly of the studied Metagenome. This is a simple metagenomic dataset ranging from a mice fecal sample with a defined community.
+The folder contain the FastQ files and the assembly of the studied Metagenome. This is a simple metagenomic dataset ranging from a mice fecal sample with a defined community. It will allow us to perform some tests without too much computationnal time.
 
 ## Usage
 
@@ -73,12 +79,16 @@ There are a number of other, optional, miscellaneous actions:
 using the provided dataset, you can launch the whole pipeline. You will skeep the validation step as checkM is a very consuming software (40 Go RAM) unable to run on your VM.
 
 ```sh
-    metator pipeline -v -F -i 10 -a /opt/metagenomics/tp3/ass_tuto.fa -1 /opt/metagenomics/tp3/Tuto_for.fastq.gz -2 /opt/metagenomics/tp3/Tuto_rev.fastq.gz -o Meta3C
+    metator pipeline -v -F -i 10 -a /opt/metagenomics/tp3/assembly_Tuto.fa -1 /opt/metagenomics/tp3/MM11_lib5_for.fastq.gz -2 /opt/metagenomics/tp3/MM11_lib5_rev.fastq.gz -o Meta3C
 ```
 
 MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis.
 
 you can restart the pipeline by varying the number of iterations of the louvain algorithm.
+
+you can also perform each step separetly.
+
+you can also use another clustering algorithm.
 
 ## Output files
 
@@ -87,7 +97,7 @@ As we have launch the pileine without the checkM validation, the output files ar
 You will find the complete output files at the following path:
 
 ```sh
-   ls -l /opt/metagenomics/tp3/output_Tuto/
+   ls -l /opt/metagenomics/tp3/Tuto_MetaTOR_output/
 ```
 
 
