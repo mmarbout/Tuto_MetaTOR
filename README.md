@@ -22,8 +22,10 @@ Metagenomic Tridimensional Organisation-based Reassembly
   <img src="docs/example/images/metator_logo.png" width="200">
 </p>
 
-A tutorial is available [here](docs/example/metator_tutorial.md) to explain how to use metaTOR. More advanced tutorials to analyze the output files are also available:
+if you are interested in MetaTOR, different tutotrials are available at the following links:
 
+
+* A tutorial is available [here](docs/example/metator_tutorial.md) to explain how to use metaTOR. 
 * [Anvio](https://merenlab.org/software/anvio/) manual curation of the contaminated bins. Available [here](docs/example/manual_curation_of_metator_MAGs.md).
 * Visualization and scaffolding of the MAGs with the contactmap modules of MetaTOR. Available [here](docs/example/MAG_visualization_and_scaffolding.md).
 
