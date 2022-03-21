@@ -121,25 +121,44 @@ you can explore the different files. MetaTOR also generates different plot conce
 
 3C and MetaTOR also allow to generate contact matrices of various object (contigs, bin, MAG).
 
-the command is the following:
+the command follow the following rules:
 
 ```sh
    metator contactmap --help
 ```
 
-by using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files).
-
-WARNING !!!   the command only generates the contact map files but not the pdf files. To generate an image file, we will use hicstuff:
+now, we can generate one contactmap file
 
 ```sh
-   hicstuff view --help
+   metator contactmap -a Tuto_MetaTOR/assembly_Tuto.fa -c /opt/metagenomics/tp3/Tuto_MetaTOR_output/contig_data_final.txt -n "NODE_1904_length_66902_cov_0" -o Tuto_MetaTOR/contact_map_1/ -O contig --pairs /opt/metagenomics/tp3/Tuto_MetaTOR_output/alignment_0.pairs -F -e HinfI,DpnII
 ```
 
-as you can see hicstuff has many options... here is examples of command line
+
+by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files {/opt/metagenomics/tp3/Tuto_MetaTOR_output/}). Be carefull to change the name of the output directory
+
+WARNING !!!   the command only generates the contact map files but not the pdf files. To generate an image file, we will use hicstuff and several command lines:
+
+hicstuff have many options
 
 ```sh
    hicstuff view -f 
 ```
+
+ here is example of a command line to rebin a contactmap to 10kb
+
+```sh
+   hicstuff rebin -f Tuto_MetaTOR/contact_map-1/fragments_list.txt -c Tuto_MetaTOR/contact_map_1/info_contigs.txt -b 10kb Tuto_MetaTOR/contact_map_1/abs_fragments_contacts_weighted.txt Tuto_MetaTOR/contact_map_1/map_10Kb
+```
+
+you can now generate the image file using a script located here: /opt/metagenomics/tp3/
+
+NB: the second argument is a binning factor. If you put 1 you will obtain the same binning otherwise you will obtain mutliples of the binning.
+
+```sh
+   python3.8  /opt/metagenomics/tp3/sparse_mat.py Tuto_MetaTOR/contact_map_1/map_10Kb.mat.tsv 1  Tuto_MetaTOR/contact_map_1/map_10Kb_raw.pdf Tuto_MetaTOR/contact_map_1/map_10Kb_norm.pdf 
+```
+
+you can now generate the different image files of your different matrices. Be carefull with the binning and the size of your matrix ... computaionnal time could be important for large matrices and high resolution. 
 
 ## References
 
