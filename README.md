@@ -164,7 +164,9 @@ NB: the second argument is a binning factor. If you put 1 you will obtain the sa
 python3.8  /opt/metagenomics/tp3/sparse_mat.py Tuto_MetaTOR/contact_map_1/map_10Kb.mat.tsv 1  Tuto_MetaTOR/contact_map_1/map_10Kb_raw.pdf Tuto_MetaTOR/contact_map_1/map_10Kb_norm.pdf 
 ```
 
-you can now generate the different image files of your different matrices (the largest contig, a MAG). Be carefull with the binning size and factor when trying to generate matrix for MAGs !!! computation could be time consuming for large MAG with high resolution (few kb). 
+you can now generate the different image files of your different matrices (the largest contig, a MAG ... etc). Be carefull with the binning size and factor when trying to generate matrix for MAGs !!! computation could be time consuming for large MAG with high resolution (few kb). 
+
+if you want to go further ... have a look at the different tutorials and publications
 
 ## References
 
