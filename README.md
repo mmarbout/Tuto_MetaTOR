@@ -40,35 +40,35 @@ first of all, we will need to set up the VM and our environment.
 1- you will have to create a directory for the tutorial
 
 ```sh
-   mkdir Tuto_MetaTOR/
+mkdir Tuto_MetaTOR/
 ```
 
 2- you will need to copy the assembly file in order to use it
 
 ```sh
-   cp /opt/metagenomics/tp3/assembly_Tuto.fa Tuto_MetaTOR/
+cp /opt/metagenomics/tp3/assembly_Tuto.fa Tuto_MetaTOR/
 ```
 
 3- you will need to provide the PATH to the clustering algorithm. In our case we will use the louvain algorithm.
 
 ```sh
-   export LOUVAIN_PATH=/opt/metagenomics/tp3/gen-louvain/
+export LOUVAIN_PATH=/opt/metagenomics/tp3/gen-louvain/
 ```
 
 The different data needed to perform the practical course can be found at the following path:
 
 ```sh
-   ls -l /opt/metagenomics/tp3/
+ls -l /opt/metagenomics/tp3/
 ```
 
-The folder contain the FastQ files and the assembly of the studied Metagenome. This is a simple metagenomic dataset ranging from a mice fecal sample with a defined community. It will allow us to perform some tests without too much computationnal time.
+The folder contain the FastQ files correzsponding to the Hi-C library of the Metagenome. This is a simple metagenomic dataset ranging from a mice fecal sample with a defined community. It will allow us to perform some tests without too much computationnal time.
 
 ## Usage
 
-MetaTOR is a modular piepline allowing to perform each step separetly or in end to end pipeline
+MetaTOR is a modular piepline allowing to perform each step separetly or in an end to end pipeline
 
 ```sh
-    metator {network|partition|validation|pipeline} [parameters]
+metator {network|partition|validation|pipeline} [parameters]
 ```
 
 A metaTOR command takes the form `metator action --param1 arg1 --param2
@@ -96,7 +96,7 @@ There are a number of other, optional, miscellaneous actions:
 using the provided dataset, you can launch the whole pipeline. You will skeep the validation step as checkM is a very consuming software (40 Go RAM) unable to run on your VM.
 
 ```sh
-    metator pipeline -v -F -i 10 -a Tuto_MetaTOR/assembly_Tuto.fa -1 /opt/metagenomics/tp3/MM11_lib5_for.fastq.gz -2 /opt/metagenomics/tp3/MM11_lib5_rev.fastq.gz -o Tuto_MetaTOR/test1/
+metator pipeline -v -F -i 10 -a Tuto_MetaTOR/assembly_Tuto.fa -1 /opt/metagenomics/tp3/MM11_lib5_for.fastq.gz -2 /opt/metagenomics/tp3/MM11_lib5_rev.fastq.gz -o Tuto_MetaTOR/test1/
 ```
 
 MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis.
@@ -112,7 +112,7 @@ As we have launch the pileine without the checkM validation, the output files ar
 You will find the complete output files at the following path:
 
 ```sh
-   ls -l /opt/metagenomics/tp3/Tuto_MetaTOR_output/
+ls -l /opt/metagenomics/tp3/Tuto_MetaTOR_output/
 ```
 
 you can explore the different files. MetaTOR also generates different plot concerning the MAGs obtained and the binning of the assembly.
@@ -124,13 +124,13 @@ you can explore the different files. MetaTOR also generates different plot conce
 the command follow the following rules:
 
 ```sh
-   metator contactmap --help
+metator contactmap --help
 ```
 
 now, we can generate one contactmap file
 
 ```sh
-   metator contactmap -a Tuto_MetaTOR/assembly_Tuto.fa -c /opt/metagenomics/tp3/Tuto_MetaTOR_output/contig_data_final.txt -n "NODE_1904_length_66902_cov_0" -o Tuto_MetaTOR/contact_map_1/ -O contig --pairs /opt/metagenomics/tp3/Tuto_MetaTOR_output/alignment_0.pairs -F -e HinfI,DpnII
+metator contactmap -a Tuto_MetaTOR/assembly_Tuto.fa -c /opt/metagenomics/tp3/Tuto_MetaTOR_output/contig_data_final.txt -n "NODE_1904_length_66902_cov_0" -o Tuto_MetaTOR/contact_map_1/ -O contig --pairs /opt/metagenomics/tp3/Tuto_MetaTOR_output/alignment_0.pairs -F -e HinfI,DpnII
 ```
 
 
@@ -138,27 +138,35 @@ by re-using the command, generate a contact map of the most covered or longest c
 
 WARNING !!!   the command only generates the contact map files but not the pdf files. To generate an image file, we will use hicstuff and several command lines:
 
-hicstuff have many options
+hicstuff have many commands and options
 
 ```sh
-   hicstuff view -f 
+hicstuff --help 
+```
+
+one command allow to reconstruct contact map (i.e. matrices) with a fixed bin size in kilobase (kb)
+
+```sh
+hicstuff rebin --help 
 ```
 
  here is example of a command line to rebin a contactmap to 10kb
 
 ```sh
-   hicstuff rebin -f Tuto_MetaTOR/contact_map-1/fragments_list.txt -c Tuto_MetaTOR/contact_map_1/info_contigs.txt -b 10kb Tuto_MetaTOR/contact_map_1/abs_fragments_contacts_weighted.txt Tuto_MetaTOR/contact_map_1/map_10Kb
+hicstuff rebin -f Tuto_MetaTOR/contact_map_1/fragments_list.txt -c Tuto_MetaTOR/contact_map_1/info_contigs.txt -b 10kb Tuto_MetaTOR/contact_map_1/abs_fragments_contacts_weighted.txt Tuto_MetaTOR/contact_map_1/map_10Kb
 ```
 
 you can now generate the image file using a script located here: /opt/metagenomics/tp3/
 
-NB: the second argument is a binning factor. If you put 1 you will obtain the same binning otherwise you will obtain mutliples of the binning.
+the script take 4 arguments : 1-the matrix 2-the rebin factor 3-the raw image file 4-the normalized image file
+
+NB: the second argument is a binning factor. If you put 1 you will obtain the same binning as previously set with hicstuff rebin.
 
 ```sh
-   python3.8  /opt/metagenomics/tp3/sparse_mat.py Tuto_MetaTOR/contact_map_1/map_10Kb.mat.tsv 1  Tuto_MetaTOR/contact_map_1/map_10Kb_raw.pdf Tuto_MetaTOR/contact_map_1/map_10Kb_norm.pdf 
+python3.8  /opt/metagenomics/tp3/sparse_mat.py Tuto_MetaTOR/contact_map_1/map_10Kb.mat.tsv 1  Tuto_MetaTOR/contact_map_1/map_10Kb_raw.pdf Tuto_MetaTOR/contact_map_1/map_10Kb_norm.pdf 
 ```
 
-you can now generate the different image files of your different matrices. Be carefull with the binning and the size of your matrix ... computaionnal time could be important for large matrices and high resolution. 
+you can now generate the different image files of your different matrices (the largest contig, a MAG). Be carefull with the binning size and factor when trying to generate matrix for MAGs !!! computation could be time consuming for large MAG with high resolution (few kb). 
 
 ## References
 
