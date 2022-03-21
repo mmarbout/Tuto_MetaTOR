@@ -99,15 +99,14 @@ using the provided dataset, you can launch the whole pipeline. You will skeep th
 metator pipeline -v -F -i 10 -a Tuto_MetaTOR/assembly_Tuto.fa -1 /opt/metagenomics/tp3/MM11_lib5_for.fastq.gz -2 /opt/metagenomics/tp3/MM11_lib5_rev.fastq.gz -o Tuto_MetaTOR/test1/
 ```
 
-MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis.
+MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis. You will also find a log file in the output directory containning the different informations.
 
-you can restart the pipeline by varying the number of iterations of the louvain algorithm (from 1 to 25 for instance) or by performing each step independently.
-
+you can restart the pipeline by varying the number of iterations of the louvain algorithm (from 1 to 20 for instance) and observe how the number of MAGs evolve depending on the number of iterations. Be carefull to provide a different output directory.
 
 
 ## Output files
 
-As we have launch the pileine without the checkM validation, the output files are not complete.
+As we have launch the pileine without the checkM validation, the output files are not complete. MetaTOR use checkM to validate MAGs and to select MAGs that need to be cleaned through a recursive process of the algorithm. Indeed, in very large network (which is not the case here), the algorithm suffer from resolution limits and need sometimes to be re-run on sub-network.
 
 You will find the complete output files at the following path:
 
@@ -115,11 +114,11 @@ You will find the complete output files at the following path:
 ls -l /opt/metagenomics/tp3/Tuto_MetaTOR_output/
 ```
 
-you can explore the different files. MetaTOR also generates different plot concerning the MAGs obtained and the binning of the assembly.
+you can explore the different files. MetaTOR also generates different plot / image file concerning the MAGs obtained and the binning of the assembly.
 
 ## 3D Analysis
 
-3C and MetaTOR also allow to generate contact matrices of various object (contigs, bin, MAG).
+3C data and MetaTOR also allow to generate contact matrices of various genomic object (contigs, bin, MAG, overlapping MAGs).
 
 the command follow the following rules:
 
@@ -133,8 +132,7 @@ now, we can generate one contactmap file
 metator contactmap -a Tuto_MetaTOR/assembly_Tuto.fa -c /opt/metagenomics/tp3/Tuto_MetaTOR_output/contig_data_final.txt -n "NODE_1904_length_66902_cov_0" -o Tuto_MetaTOR/contact_map_1/ -O contig --pairs /opt/metagenomics/tp3/Tuto_MetaTOR_output/alignment_0.pairs -F -e HinfI,DpnII
 ```
 
-
-by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files {/opt/metagenomics/tp3/Tuto_MetaTOR_output/}). Be carefull to change the name of the output directory
+by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files {/opt/metagenomics/tp3/Tuto_MetaTOR_output/}). Be carefull to change the name of the output directory !!!!
 
 WARNING !!!   the command only generates the contact map files but not the pdf files. To generate an image file, we will use hicstuff and several command lines:
 
