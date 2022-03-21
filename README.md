@@ -10,6 +10,7 @@ Practical course to learn how to use MetaTOR piepline and Hi-C data for binning 
 * [Usage](#Usage)
 * [End-to-End pipeline](#End-to-End-pipeline)
 * [Output files](#Output-files)
+* [MAGs Analysis](#MAGs-Analysis)
 * [References](#References)
 * [Contact](#Contact)
 
@@ -32,7 +33,21 @@ Principle of MetaTOR pipeline:
 
 ## Dataset
 
-first of all, you will need to provide the PATH to the clustering algorithm. In our case we will use the louvain algorithm.
+first of all, we will need to set up the VM and our environment.
+
+1- you will have to create a directory for the tutorial
+
+```sh
+   mkdir Tuto_MetaTOR/
+```
+
+2- you will need to copy the assembly file in order to use it
+
+```sh
+   cp /opt/metagenomics/tp3/assembly_Tuto.fa Tuto_MetaTOR/
+```
+
+3- you will need to provide the PATH to the clustering algorithm. In our case we will use the louvain algorithm.
 
 ```sh
    export LOUVAIN_PATH=/opt/metagenomics/tp3/gen-louvain/
@@ -79,16 +94,14 @@ There are a number of other, optional, miscellaneous actions:
 using the provided dataset, you can launch the whole pipeline. You will skeep the validation step as checkM is a very consuming software (40 Go RAM) unable to run on your VM.
 
 ```sh
-    metator pipeline -v -F -i 10 -a /opt/metagenomics/tp3/assembly_Tuto.fa -1 /opt/metagenomics/tp3/MM11_lib5_for.fastq.gz -2 /opt/metagenomics/tp3/MM11_lib5_rev.fastq.gz -o Meta3C
+    metator pipeline -v -F -i 10 -a Tuto_MetaTOR/assembly_Tuto.fa -1 /opt/metagenomics/tp3/MM11_lib5_for.fastq.gz -2 /opt/metagenomics/tp3/MM11_lib5_rev.fastq.gz -o Tuto_MetaTOR/test1/
 ```
 
 MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis.
 
-you can restart the pipeline by varying the number of iterations of the louvain algorithm.
+you can restart the pipeline by varying the number of iterations of the louvain algorithm (from 1 to 25 for instance) or by performing each step independently.
 
-you can also perform each step separetly.
 
-you can also use another clustering algorithm.
 
 ## Output files
 
@@ -100,6 +113,25 @@ You will find the complete output files at the following path:
    ls -l /opt/metagenomics/tp3/Tuto_MetaTOR_output/
 ```
 
+you can explore the different files. MetaTOR also generates different plot concerning the MAGs obtained and the binning of the assembly.
+
+## MAGs Analysis
+
+MetaTOR also allow to generate contact matrices of various object (contigs, bin, MAG).
+
+the command is the following:
+
+```sh
+   metator contactmap --help
+```
+
+by using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files).
+
+WARNING !!!   the command only generates the contact map files but not the pdf files. To do so, we will use hicstuff:
+
+```sh
+   hicstuff view --help
+```
 
 ## References
 
