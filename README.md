@@ -1,16 +1,5 @@
 # Tuto_MetaTOR
 
-
-[![PyPI version](https://badge.fury.io/py/metator.svg)](https://badge.fury.io/py/metator)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/metator.svg)
-[![Build Status](https://github.com/koszullab/metator/actions/workflows/python-package.yml/badge.svg)](https://github.com/koszullab/metaTOR/actions)
-[![codecov](https://codecov.io/gh/koszullab/metator/branch/master/graph/badge.svg)](https://codecov.io/gh/koszullab/metator)
-[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/koszullab/metator)](https://hub.docker.com/r/koszullab/metator)
-[![Read the docs](https://readthedocs.org/projects/metator/badge)](https://metator.readthedocs.io)
-[![License: GPLv3](https://img.shields.io/badge/License-GPL%203-0298c3.svg)](https://opensource.org/licenses/bo-3.0)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
-
-
 Practical course to learn how to use MetaTOR piepline and Hi-C data for binning of metagenomic assemblies.
 
 
@@ -43,10 +32,15 @@ Principle of MetaTOR pipeline:
 
 ## Dataset
 
-Dowload the different needed dataset to perform the practical course.
+The different data needed to perform the practical course can be found at the following path:
 
+```sh
+    ls -l /opt/metagenomics/tp3/
+```
 
+First, you will need to get the data (FastQ files, Assembly, Louvain algorithm…) and provide authorization for the Louvain executable.
 
+In your workspace, copy/paste the following lines:
 
 ## Usage
 
