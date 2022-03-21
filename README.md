@@ -129,10 +129,16 @@ the command is the following:
 
 by using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files).
 
-WARNING !!!   the command only generates the contact map files but not the pdf files. To do so, we will use hicstuff:
+WARNING !!!   the command only generates the contact map files but not the pdf files. To generate an image file, we will use hicstuff:
 
 ```sh
    hicstuff view --help
+```
+
+as you can see hicstuff has many options... here is examples of command line
+
+```sh
+   hicstuff view -f 
 ```
 
 ## References
