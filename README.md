@@ -10,7 +10,7 @@ Practical course to learn how to use MetaTOR piepline and Hi-C data for binning 
 * [Usage](#Usage)
 * [End-to-End pipeline](#End-to-End-pipeline)
 * [Output files](#Output-files)
-* [MAGs Analysis](#MAGs-Analysis)
+* [3D Analysis](#3D-Analysis)
 * [References](#References)
 * [Contact](#Contact)
 
@@ -115,9 +115,9 @@ You will find the complete output files at the following path:
 
 you can explore the different files. MetaTOR also generates different plot concerning the MAGs obtained and the binning of the assembly.
 
-## MAGs Analysis
+## 3D Analysis
 
-MetaTOR also allow to generate contact matrices of various object (contigs, bin, MAG).
+3C and MetaTOR also allow to generate contact matrices of various object (contigs, bin, MAG).
 
 the command is the following:
 
