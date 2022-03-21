@@ -22,7 +22,7 @@ Metagenomic Tridimensional Organisation-based Reassembly
   <img src="docs/example/images/metator_logo.png" width="200">
 </p>
 
-if you are interested in MetaTOR, different tutotrials are available at the following links:
+if you want more described tutotrials of MetaTOR and the different possibilities offered by the pipeline , various tutorials are available at the following links:
 
 
 * A tutorial is available [here](docs/example/metator_tutorial.md) to explain how to use metaTOR. 
