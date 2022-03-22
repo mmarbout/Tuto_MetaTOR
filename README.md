@@ -128,7 +128,7 @@ metator contactmap --help
 now, we can generate one contactmap file
 
 ```sh
-metator contactmap -a Tuto_MetaTOR/assembly_Tuto.fa -c /opt/metagenomics/tp3/Tuto_MetaTOR_output/contig_data_final.txt -n "NODE_1904_length_66902_cov_0" -o Tuto_MetaTOR/contact_map_1/ -O contig --pairs /opt/metagenomics/tp3/Tuto_MetaTOR_output/alignment_0.pairs -F -e HinfI,DpnII
+metator contactmap -a Tuto_MetaTOR/assembly_Tuto.fa -c /opt/metagenomics/tp3/Tuto_MetaTOR_output/contig_data_final.txt -n "NODE_1904_length_66902_cov_0" -o Tuto_MetaTOR/contact_map_1/ -O contig --pairs /opt/metagenomics/tp3/Tuto_MetaTOR_output/alignment_0.pairs -F -f -e HinfI,DpnII
 ```
 
 by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files {/opt/metagenomics/tp3/Tuto_MetaTOR_output/}). Be carefull to change the name of the output directory !!!!
