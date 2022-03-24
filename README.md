@@ -167,6 +167,15 @@ you can now generate the different image files of your different matrices (the l
 
 if you want to go further ... have a look at the different tutorials and publications
 
+you can also download the following data ranging from different bacterial matrices and have a look and generate some contact matrices. Be carefull with the mock community data as the matricx is quite big.
+
+```sh
+wget  https://dl.pasteur.fr/fop/kY4Ov5qQ/Tuto_Matrices.tar.gz
+``
+```sh
+tar -xvf Tuto_Matrices.tar.gz -C Tuto_MetaTOR/
+``
+
 ## References
 
 * [Metagenomic chromosome conformation capture (meta3C) unveils the diversity of chromosome organization in microorganisms](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4381813/), Martial Marbouty, Axel Cournac, Jean-François Flot, Hervé Marie-Nelly, Julien Mozziconacci, and Romain Koszul, eLife, 2014
