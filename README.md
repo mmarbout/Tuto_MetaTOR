@@ -171,10 +171,10 @@ you can also download the following data ranging from different bacterial matric
 
 ```sh
 wget  https://dl.pasteur.fr/fop/kY4Ov5qQ/Tuto_Matrices.tar.gz
-``
+```
 ```sh
 tar -xvf Tuto_Matrices.tar.gz -C Tuto_MetaTOR/
-``
+```
 
 ## References
 
