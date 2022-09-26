@@ -1,6 +1,8 @@
+config VM if possible:
+
 8 threads 16 Go RAM
 
-software
+software:
 
 python3
 
