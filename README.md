@@ -1,6 +1,6 @@
 # Tuto_MetaTOR
 
-For this session we will learn how to use 3C/Hi-C data and MEtaTOR to perform the binning of a simple metagenome. The data come from a fecal sample from the mice oligoMM.
+For this session we will learn how to use 3C/Hi-C data and MetaTOR to perform the binning of a simple metagenome. The data come from a mock community designed at the lab.
 
 ## Table of contents
 
