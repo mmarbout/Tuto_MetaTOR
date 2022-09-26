@@ -3,8 +3,9 @@
 software
 
 python3
-numpy
+
 MetaTOR
+
 Hicstuff
-R
-louvain algorithm (within the software repertory in the github)
+
+louvain algorithm (already provided within the repertory that the students will download)
