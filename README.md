@@ -41,16 +41,13 @@ cd ~/
 ```
 
 ```sh
-wget  https://dl.pasteur.fr/fop/kY4Ov5qQ/EBAME_2022_TP3C.tar.gz
-```
-```sh
 tar -xvf EBAME_2022_TP3C.tar.gz -C EBAME_2022_TP3C/
 ```
 
 then we can explore the datasets
 
 ```sh
-cd EBAME_2022_TP3C/
+cd EBAME_2022/
 ```
 ```sh
 ls -l
