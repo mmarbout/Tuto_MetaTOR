@@ -34,35 +34,29 @@ Principle of MetaTOR pipeline:
 
 ## Dataset
 
-first of all, we will need to recover the data.
+In this analysis, we will use a simple metagenomic dataset with a defined community. It will allow us to perform some tests without too much computationnal time.
+
+the different data for the tutorial can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/]
+
+The folder contain the FastQ files correzsponding to the Hi-C library of the mock community, the FastA files of the assembly and others folder we will use later.
 
 ```sh
-cd ~/
+ls -l /ifb/data/public/teachdata/ebame-2022/metator/scripts/gen-louvain/
 ```
+
+the assembly can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastA/]
+
+Here the assembly has been made using ShotGun sequences (PE Illumina sequencing: 2x75bp, NextSeq500). Before building the assembly reads were filtered and trimmed using Cutadapt (v1.9.1). Here the assembly have been build using Megahit (v1.1.1.2) with default paramters.
+
+in order to perform the binning based on 3D contact, we also need 3C dataset from the same sample.
+
+FastQ Hi-C PE reads can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastQ/]
+
+First of all, you will need to provide the PATH (absolute PATH !!) to the clustering algorithm. In our case we will use the louvain algorithm.
 
 ```sh
-tar -xvf EBAME_2022_TP3C.tar.gz -C EBAME_2022_TP3C/
+export LOUVAIN_PATH=/ifb/data/public/teachdata/ebame-2022/metator/scripts/gen-louvain/
 ```
-
-then we can explore the datasets
-
-```sh
-cd EBAME_2022/
-```
-```sh
-ls -l
-```
-
-you will need to provide the PATH (absolute PATH !!) to the clustering algorithm. In our case we will use the louvain algorithm.
-
-```sh
-export LOUVAIN_PATH=/opt/metagenomics/tp3/gen-louvain/
-```
-
-The different data needed to perform the practical course are in your current folder:
-
-
-The folder contain the FastQ files correzsponding to the Hi-C library of the mock community. This is a simple metagenomic dataset with a defined community. It will allow us to perform some tests without too much computationnal time.
 
 ## Usage
 
