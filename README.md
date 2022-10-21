@@ -47,7 +47,7 @@ ls -l /ifb/data/public/teachdata/ebame-2022/metator/
 the assembly can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastA/]
 
 ```sh
-ls -l /ifb/data/public/teachdata/ebame-2022/metator/FastA
+ls -l /ifb/data/public/teachdata/ebame-2022/metator/FastA/
 ```
 
 Here the assembly has been made using ShotGun sequences (PE Illumina sequencing: 2x75bp, NextSeq500). Before building the assembly reads were filtered and trimmed using Cutadapt (v1.9.1). Here the assembly have been build using Megahit (v1.1.1.2) with default paramters.
@@ -57,7 +57,7 @@ in order to perform the binning based on 3D contact, we also need 3C dataset fro
 FastQ Hi-C PE reads can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastQ/]
 
 ```sh
-ls -l /ifb/data/public/teachdata/ebame-2022/metator/FastQ
+ls -l /ifb/data/public/teachdata/ebame-2022/metator/FastQ/
 ```
 
 First of all, you will need to provide the PATH (absolute PATH !!) to the clustering algorithm. In our case we will use the louvain algorithm.
