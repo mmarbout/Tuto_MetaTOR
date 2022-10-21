@@ -32,6 +32,34 @@ in order to perform the binning based on 3D contact, we also need 3C dataset fro
 
 FastQ Hi-C PE reads can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastQ/]
 
+## Usage
+
+```sh
+    metator {network|partition|validation|pipeline} [parameters]
+```
+
+A metaTOR command takes the form `metator action --param1 arg1 --param2
+arg2 #etc.`
+
+There are three actions/steps in the metaTOR pipeline, which must be run in the
+following order:
+
+* `network` : Generate metaHiC contigs network from fastq reads or bam files and normalize it.
+* `partition` : Perform the Louvain or Leiden community detection algorithm many times to bin contigs according to the metaHiC signal between contigs.
+
+* `validation` : Use CheckM to validate the bins, then do a recursive decontamination step to remove contamination.
+
+There are a number of other, optional, miscellaneous actions:
+
+* `pipeline` : Run all three of the above actions sequentially or only some of them depending on the arguments given. This can take a while.
+* `contactmap` : Generates a contact map from one bin from the final ouptut of metaTOR.
+
+* `version` : display current version number.
+
+* `help` : display help message.
+
+A tutorial is available [here](docs/example/metator_tutorial.md) to explain how to use metaTOR. More advanced tutorials to analyze the output files are also available:
+
 ## A. Quick start
 
 ### 1. Simplest command
