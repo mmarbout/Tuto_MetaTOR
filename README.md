@@ -41,16 +41,24 @@ the different data for the tutorial can be found here : [/ifb/data/public/teachd
 The folder contain the FastQ files correzsponding to the Hi-C library of the mock community, the FastA files of the assembly and others folder we will use later.
 
 ```sh
-ls -l /ifb/data/public/teachdata/ebame-2022/metator/scripts/gen-louvain/
+ls -l /ifb/data/public/teachdata/ebame-2022/metator/
 ```
 
 the assembly can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastA/]
+
+```sh
+ls -l /ifb/data/public/teachdata/ebame-2022/metator/FastA
+```
 
 Here the assembly has been made using ShotGun sequences (PE Illumina sequencing: 2x75bp, NextSeq500). Before building the assembly reads were filtered and trimmed using Cutadapt (v1.9.1). Here the assembly have been build using Megahit (v1.1.1.2) with default paramters.
 
 in order to perform the binning based on 3D contact, we also need 3C dataset from the same sample.
 
 FastQ Hi-C PE reads can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastQ/]
+
+```sh
+ls -l /ifb/data/public/teachdata/ebame-2022/metator/FastQ
+```
 
 First of all, you will need to provide the PATH (absolute PATH !!) to the clustering algorithm. In our case we will use the louvain algorithm.
 
@@ -63,7 +71,7 @@ export LOUVAIN_PATH=/ifb/data/public/teachdata/ebame-2022/metator/scripts/gen-lo
 MetaTOR is a modular pipeline allowing to perform each step separetly or in an end to end pipeline
 
 ```sh
-metator {network|partition|validation|pipeline} [parameters]
+metator --help
 ```
 
 A metaTOR command takes the form `metator action --param1 arg1 --param2
@@ -89,6 +97,10 @@ There are a number of other, optional, miscellaneous actions:
 ## End-to-End pipeline
 
 using the provided dataset, you can launch the whole pipeline. You will skeep the validation step as checkM is a very consuming software (40 Go RAM) unable to run on your VM.
+
+```sh
+metator pipeline --help
+```
 
 ```sh
 metator pipeline -v -F -i 10 -a FastA/mock_ass_tot.fa -1 FastQ/lib_3C_for.fastq.gz -2 FastQ/lib_3C_rev.fastq.gz -o test_MetaTOR/
