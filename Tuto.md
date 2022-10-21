@@ -24,11 +24,13 @@ In this analysis, we will use a simple bacterial community ranging from stool sa
 
 Here the assembly has been made using ShotGun sequences (PE Illumina sequencing: 2x75bp, NextSeq500). Before building the assembly reads were filtered and trimmed using Cutadapt (v1.9.1). Here the assembly have been build using Megahit (v1.1.1.2) with default paramters.
 
-the assembly can be found here : XXXX
+the different data for the tutorial can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/]
 
-in order to perform the binning based on 3D contact, we also need Hi-C dataset from the same sample.
+the assembly can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastA/]
 
-FastQ Hi-C PE reads can be found here : XXXX
+in order to perform the binning based on 3D contact, we also need 3C dataset from the same sample.
+
+FastQ Hi-C PE reads can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastQ/]
 
 ## A. Quick start
 
