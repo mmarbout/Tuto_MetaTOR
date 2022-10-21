@@ -1,6 +1,6 @@
 # Tutorial MetaTOR
 
-In this notebook we will give an example on how to run MetaTOR in order to bin a small metganomics assembly into MAGs and explain the output of the pipeline.
+In this notebook we will give an example on how to run MetaTOR.
 
 ## Table of contents
 
@@ -20,17 +20,15 @@ In this notebook we will give an example on how to run MetaTOR in order to bin a
 
 ## Input data
 
-In this analysis, we will use a simple bacterial community ranging from stool samples from gnotobiotic mice (OligoMM12) 
+In this analysis, we can use various published datasets:
 
-Here the assembly has been made using ShotGun sequences (PE Illumina sequencing: 2x75bp, NextSeq500). Before building the assembly reads were filtered and trimmed using Cutadapt (v1.9.1). Here the assembly have been build using Megahit (v1.1.1.2) with default paramters.
+Marbouty et al., Science Advances 2017
 
-the different data for the tutorial can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/]
+Baudry et al., Frontiers 2019
 
-the assembly can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastA/]
+Marbouty et al., Elife 2021
 
-in order to perform the binning based on 3D contact, we also need 3C dataset from the same sample.
-
-FastQ Hi-C PE reads can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastQ/]
+others datasets from different labs are also available on the NCBI website
 
 ## Usage
 
