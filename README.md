@@ -103,7 +103,7 @@ metator pipeline --help
 ```
 
 ```sh
-metator pipeline -v -F -i 10 -a FastA/mock_ass_tot.fa -1 FastQ/lib_3C_for.fastq.gz -2 FastQ/lib_3C_rev.fastq.gz -o test_MetaTOR/
+metator pipeline -v -F -i 10 -a /ifb/data/public/teachdata/ebame-2022/metator/FastA/mock_ass_tot.fa -1 /ifb/data/public/teachdata/ebame-2022/metator/FastQ/lib_3C_for.fastq.gz -2 /ifb/data/public/teachdata/ebame-2022/metator/FastQ/lib_3C_rev.fastq.gz -o test_MetaTOR/
 ```
 
 MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis. You will also find a log file in the output directory containning the different informations.
@@ -118,7 +118,7 @@ As we have launch the pileine without the checkM validation, the output files ar
 You will find the complete output files at the following path:
 
 ```sh
-ls -l output_MetaTOR/
+ls -l /ifb/data/public/teachdata/ebame-2022/metator/output_MetaTOR/
 ```
 
 you can explore the different files. MetaTOR also generates different plot / image file concerning the MAGs obtained and the binning of the assembly.
@@ -136,7 +136,7 @@ metator contactmap --help
 now, we can generate one contactmap file
 
 ```sh
-metator contactmap -a FastA/mock_ass_tot.fa -c output_MetaTOR/contig_data_final.txt -n "NODE_1904_length_66902_cov_0" -o contact_map_1/ -O contig --pairs output_MetaTOR/alignment_0.pairs -F -f -e HinfI,DpnII
+metator contactmap -a /ifb/data/public/teachdata/ebame-2022/metator/FastA/mock_ass_tot.fa -c /ifb/data/public/teachdata/ebame-2022/metator/output_MetaTOR/contig_data_final.txt -n "NODE_1904_length_66902_cov_0" -o contact_map_1/ -O contig --pairs /ifb/data/public/teachdata/ebame-2022/metator/output_MetaTOR/alignment_0.pairs -F -f -e HinfI,DpnII
 ```
 
 by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files {/opt/metagenomics/tp3/Tuto_MetaTOR_output/}). Be carefull to change the name of the output directory !!!!
