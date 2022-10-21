@@ -10,4 +10,4 @@ MetaTOR
 
 Hicstuff
 
-louvain algorithm (already provided within the repertory that the students will download)
+louvain algorithm (provided within the repertory that you will download)
