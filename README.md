@@ -39,13 +39,13 @@ In this analysis, we will use a simple metagenomic dataset with a defined commun
 the different data for the tutorial need to be downloaded:
 
 ```sh
-wget 
+wget https://we.tl/t-KXgr91tcgA
 ```
 
 then we will uncompress the folder
 
 ```sh
-tar xvf EBAME_2022.tar
+tar xvf EBAME_2022_Tuto_MetaTOR.tar
 ```
 
 
