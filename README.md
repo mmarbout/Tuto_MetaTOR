@@ -36,18 +36,29 @@ Principle of MetaTOR pipeline:
 
 In this analysis, we will use a simple metagenomic dataset with a defined community. It will allow us to perform some tests without too much computationnal time.
 
-the different data for the tutorial can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/]
+the different data for the tutorial need to be downloaded:
+
+```sh
+wget 
+```
+
+then we will uncompress the folder
+
+```sh
+tar xvf EBAME_2022.tar
+```
+
 
 The folder contain the FastQ files correzsponding to the Hi-C library of the mock community, the FastA files of the assembly and others folder we will use later.
 
 ```sh
-ls -l /ifb/data/public/teachdata/ebame-2022/metator/
+ls -l EBAME_2022/
 ```
 
 the assembly can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastA/]
 
 ```sh
-ls -l /ifb/data/public/teachdata/ebame-2022/metator/FastA/
+ls -l EBAME_2022/FastA/
 ```
 
 Here the assembly has been made using ShotGun sequences (PE Illumina sequencing: 2x75bp, NextSeq500). Before building the assembly reads were filtered and trimmed using Cutadapt (v1.9.1). Here the assembly have been build using Megahit (v1.1.1.2) with default paramters.
@@ -57,7 +68,13 @@ in order to perform the binning based on 3D contact, we also need 3C dataset fro
 FastQ Hi-C PE reads can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastQ/]
 
 ```sh
-ls -l /ifb/data/public/teachdata/ebame-2022/metator/FastQ/
+ls -l EBAME_2022/FastQ/
+```
+
+if everything is fine, you can remove the archive file
+
+```sh
+rm EBAME_2022.tar
 ```
 
 First of all, we have to activate the environment in conda
