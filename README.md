@@ -125,7 +125,7 @@ using the provided dataset, you can launch the whole pipeline. You will skeep th
 metator pipeline --help
 ```
 
-this commands will take approximately 20 min
+this commands will take approximately 30 min (Time for discussion, presentation, break or anything else)
 
 ```sh
 metator pipeline -v -F -i 10 -a EBAME_2022/FastA/mock_ass_tot.fa -1 EBAME_2022/FastQ/lib_3C_for.fastq.gz -2 EBAME_2022/FastQ/lib_3C_rev.fastq.gz -o out_MetaTOR/
