@@ -114,7 +114,11 @@ MetaTOR will provide you with various metrics about the whole pipeline. It will 
 ls -l test_MetaTOR/
 ```
 
-you can restart the pipeline by varying the number of iterations of the louvain algorithm (from 1 to 20 for instance) and observe how the number of MAGs evolve depending on the number of iterations. Be carefull to provide a different output directory.
+MetaTOR allow to restart command at different points of the pipeline. It is possible to redo a faster pipeline by using BAM files, PAIRS files or NETWORK files as starting points. As, you can restart the pipeline (will be faster now) by varying the number of iterations of the louvain algorithm (from 1 to 20 for instance) and observe how the number of MAGs evolve depending on the number of iterations. Be carefull to provide a different output directory.
+
+```sh
+metator pipeline -v -F -i 10 --start network -1 test_MetaTOR/network_0.txt -a test_MetaTOR/mock_ass_tot.fa -1 /ifb/data/public/teachdata/ebame-2022/metator/FastQ/lib_3C_for.fastq.gz -2 /ifb/data/public/teachdata/ebame-2022/metator/FastQ/lib_3C_rev.fastq.gz -o test_MetaTOR/
+```
 
 
 ## Output files
