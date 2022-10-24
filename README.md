@@ -60,10 +60,16 @@ FastQ Hi-C PE reads can be found here : [/ifb/data/public/teachdata/ebame-2022/m
 ls -l /ifb/data/public/teachdata/ebame-2022/metator/FastQ/
 ```
 
-First of all, you will need to provide the PATH (absolute PATH !!) to the clustering algorithm. In our case we will use the louvain algorithm.
+First of all, we have to activate the environment in conda
 
 ```sh
-export LOUVAIN_PATH=/ifb/data/public/teachdata/ebame-2022/metator/scripts/gen-louvain/
+conda activate metator
+```
+
+than, you will need to provide the PATH (absolute PATH !!) to the clustering algorithm. In our case we will use the louvain algorithm.
+
+```sh
+export LOUVAIN_PATH=EBAME_2022/scripts/gen-louvain/
 ```
 
 ## Usage
@@ -105,19 +111,19 @@ metator pipeline --help
 this commands will take approximately 20 min
 
 ```sh
-metator pipeline -v -F -i 10 -a /ifb/data/public/teachdata/ebame-2022/metator/FastA/mock_ass_tot.fa -1 /ifb/data/public/teachdata/ebame-2022/metator/FastQ/lib_3C_for.fastq.gz -2 /ifb/data/public/teachdata/ebame-2022/metator/FastQ/lib_3C_rev.fastq.gz -o test_MetaTOR/
+metator pipeline -v -F -i 10 -a EBAME_2022/FastA/mock_ass_tot.fa -1 EBAME_2022/FastQ/lib_3C_for.fastq.gz -2 EBAME_2022/FastQ/lib_3C_rev.fastq.gz -o out_MetaTOR/
 ```
 
 MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis. You will also find a log file in the output directory containning the different informations.
 
 ```sh
-ls -l test_MetaTOR/
+ls -l out_MetaTOR/
 ```
 
 MetaTOR allow to restart command at different points of the pipeline. It is possible to redo a faster pipeline by using BAM files, PAIRS files or NETWORK files as starting points. As, you can restart the pipeline (will be faster now) by varying the number of iterations of the louvain algorithm (from 1 to 20 for instance) and observe how the number of MAGs evolve depending on the number of iterations. Be carefull to provide a different output directory.
 
 ```sh
-metator pipeline -v -F -i 10 --start network -1 test_MetaTOR/network_0.txt -a test_MetaTOR/mock_ass_tot.fa -1 /ifb/data/public/teachdata/ebame-2022/metator/FastQ/lib_3C_for.fastq.gz -2 /ifb/data/public/teachdata/ebame-2022/metator/FastQ/lib_3C_rev.fastq.gz -o test_MetaTOR/
+metator pipeline -v -F -i 10 --start network -1 out_MetaTOR/network_0.txt -a out_MetaTOR/mock_ass_tot.fa -1 EBAME_2022/FastQ/lib_3C_for.fastq.gz -2 EBAME_2022/FastQ/lib_3C_rev.fastq.gz -o out_MetaTOR_2/
 ```
 
 
@@ -128,7 +134,7 @@ As we have launch the pileine without the checkM validation, the output files ar
 You will find the complete output files at the following path:
 
 ```sh
-ls -l /ifb/data/public/teachdata/ebame-2022/metator/output_MetaTOR/
+ls -l EBAME_2022/output_MetaTOR/
 ```
 
 you can explore the different files. MetaTOR also generates different plot / image file concerning the MAGs obtained and the binning of the assembly.
@@ -146,7 +152,7 @@ metator contactmap --help
 now, we can generate one contactmap file
 
 ```sh
-metator contactmap -a /ifb/data/public/teachdata/ebame-2022/metator/FastA/mock_ass_tot.fa -c /ifb/data/public/teachdata/ebame-2022/metator/output_MetaTOR/contig_data_final.txt -n "NODE_1904_length_66902_cov_0" -o contact_map_1/ -O contig --pairs /ifb/data/public/teachdata/ebame-2022/metator/output_MetaTOR/alignment_0.pairs -F -f -e HinfI,DpnII
+metator contactmap -a EBAME_2022/FastA/mock_ass_tot.fa -c EBAME_2022/output_MetaTOR/contig_data_final.txt -n "NODE_1904_length_66902_cov_0" -o contact_map_1/ -O contig --pairs EBAME_2022/output_MetaTOR/alignment_0.pairs -F -f -e HinfI,DpnII
 ```
 
 by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files {/opt/metagenomics/tp3/Tuto_MetaTOR_output/}). Be carefull to change the name of the output directory !!!!
