@@ -36,29 +36,22 @@ Principle of MetaTOR pipeline:
 
 In this analysis, we will use a simple metagenomic dataset with a defined community. It will allow us to perform some tests without too much computationnal time.
 
-the different data for the tutorial need to be downloaded:
+the different data for the tutorial need to be copied on your VM from the public space:
 
 ```sh
-wget https://we.tl/t-KXgr91tcgA
+cp -r /ifb/data/public/teachdata/ebame-2022/metator/ ./
 ```
-
-then we will uncompress the folder
-
-```sh
-tar xvf EBAME_2022_Tuto_MetaTOR.tar
-```
-
 
 The folder contain the FastQ files correzsponding to the Hi-C library of the mock community, the FastA files of the assembly and others folder we will use later.
 
 ```sh
-ls -l EBAME_2022/
+ls -l metator/
 ```
 
 the assembly can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastA/]
 
 ```sh
-ls -l EBAME_2022/FastA/
+ls -l metator/FastA/
 ```
 
 Here the assembly has been made using ShotGun sequences (PE Illumina sequencing: 2x75bp, NextSeq500). Before building the assembly reads were filtered and trimmed using Cutadapt (v1.9.1). Here the assembly have been build using Megahit (v1.1.1.2) with default paramters.
@@ -68,13 +61,7 @@ in order to perform the binning based on 3D contact, we also need 3C dataset fro
 FastQ Hi-C PE reads can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastQ/]
 
 ```sh
-ls -l EBAME_2022/FastQ/
-```
-
-if everything is fine, you can remove the archive file
-
-```sh
-rm EBAME_2022.tar
+ls -l metator/FastQ/
 ```
 
 First of all, we have to activate the environment in conda
@@ -83,10 +70,10 @@ First of all, we have to activate the environment in conda
 conda activate metator
 ```
 
-than, you will need to provide the PATH (absolute PATH !!) to the clustering algorithm. In our case we will use the louvain algorithm.
+than, you will need to provide the PATH to the clustering algorithm. In our case we will use the louvain algorithm.
 
 ```sh
-export LOUVAIN_PATH=EBAME_2022/scripts/gen-louvain/
+export LOUVAIN_PATH=metator/scripts/gen-louvain/
 ```
 
 ## Usage
@@ -125,22 +112,42 @@ using the provided dataset, you can launch the whole pipeline. You will skeep th
 metator pipeline --help
 ```
 
-this commands will take approximately 30 min (Time for discussion, presentation, break or anything else)
+this commands will take a very long time due to the small configuration of your VM...
 
 ```sh
-metator pipeline -v -F -i 10 -a EBAME_2022/FastA/mock_ass_tot.fa -1 EBAME_2022/FastQ/lib_3C_for.fastq.gz -2 EBAME_2022/FastQ/lib_3C_rev.fastq.gz -o out_MetaTOR/
+metator pipeline -v -F -i 10 -a metator/FastA/mock_ass_tot.fa -1 metator/FastQ/lib_3C_for.fastq.gz -2 metator/FastQ/lib_3C_rev.fastq.gz -o output_MetaTOR/
 ```
 
-MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis. You will also find a log file in the output directory containning the different informations.
+if the command start without problem and it start the alignment of the data, you can kill the process by doing [ctrl + C]
+
+MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis. You will find the complete output in the [metator] folder..
 
 ```sh
-ls -l out_MetaTOR/
+ls -l metator/output_MetaTOR/
+```
+you will also find a log file in the output directory containning the different informations of the whole process.
+
+```sh
+cat metator/output_MetaTOR/metator_20220413211257.log
 ```
 
-MetaTOR allow to restart command at different points of the pipeline. It is possible to redo a faster pipeline by using BAM files, PAIRS files or NETWORK files as starting points. As, you can restart the pipeline (will be faster now) by varying the number of iterations of the louvain algorithm (from 1 to 20 for instance) and observe how the number of MAGs evolve depending on the number of iterations. Be carefull to provide a different output directory.
+MetaTOR allow to restart command at different points of the pipeline. It is possible to redo a faster pipeline by using BAM files or PAIRS files as starting points. As, you can restart the pipeline (will be faster now) by lowering the number of iterations of the louvain algorithm (here we will do 10).
+Due to the memory comsuption of CheckM, you have to provide the option [-v] to avoid the recursive procedure and the evaluation of the bins obtained by CheckM. The option [-F] is mandatory in order to overwrite the data already written. Here we will restart the pipeline at the PAIRS level.
 
 ```sh
-metator pipeline -v -F -i 10 --start network -1 out_MetaTOR/network_0.txt -a out_MetaTOR/mock_ass_tot.fa -1 EBAME_2022/FastQ/lib_3C_for.fastq.gz -2 EBAME_2022/FastQ/lib_3C_rev.fastq.gz -o out_MetaTOR_2/
+metator pipeline -v -F -i 10 --start pair -1 metator/output_MetaTOR/alignment_0.pairs -a metator/FastA/mock_ass_tot.fa -o out_MetaTOR_2/
+```
+
+We can also make different number of iterations of the louvain algorithm in order to see the variations in the provided output.
+
+```sh
+for it in $(seq 1 2 9)
+do
+echo "number of iterations:""$it"
+metator pipeline -v -F -i "$it" --start pair -1 metator/output_MetaTOR/alignment_0.pairs -a metator/FastA/mock_ass_tot.fa -o out_MetaTOR_it"$it"/
+echo "FINITO"
+echo ""
+done
 ```
 
 
@@ -151,14 +158,28 @@ As we have launch the pileine without the checkM validation, the output files ar
 You will find the complete output files at the following path:
 
 ```sh
-ls -l EBAME_2022/output_MetaTOR/
+ls -l metator/output_MetaTOR/
 ```
 
 you can explore the different files. MetaTOR also generates different plot / image file concerning the MAGs obtained and the binning of the assembly.
 
+you will find info about the contigs
+
+```sh
+cat metator/output_MetaTOR/contig_data_final.txt | head
+```
+
+but also about the MAGs
+
+```sh
+cat metator/output_MetaTOR/bin_summary.txt | head
+```
+
+NB: the file [binning.txt] allow to use it in ANVIO
+
 ## 3D Analysis
 
-3C data and MetaTOR also allow to generate contact matrices of various genomic object (contigs, bin, MAG, overlapping MAGs).
+3C data and MetaTOR (by it coonexion with our software hicstuff) also allow to generate contact matrices of various genomic object (contigs, bin, MAG, overlapping MAGs).
 
 the command follow the following rules:
 
@@ -169,10 +190,10 @@ metator contactmap --help
 now, we can generate one contactmap file
 
 ```sh
-metator contactmap -a EBAME_2022/FastA/mock_ass_tot.fa -c EBAME_2022/output_MetaTOR/contig_data_final.txt -n "NODE_1904_length_66902_cov_0" -o contact_map_1/ -O contig --pairs EBAME_2022/output_MetaTOR/alignment_0.pairs -F -f -e HinfI,DpnII
+metator contactmap -a metator/FastA/mock_ass_tot.fa -c metator/output_MetaTOR/contig_data_final.txt -n "NODE_1078_len_298687" -o contact_map_1/ -O contig --pairs metator/output_MetaTOR/alignment_0.pairs -F -f -e HinfI,DpnII
 ```
 
-by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files {/opt/metagenomics/tp3/Tuto_MetaTOR_output/}). Be carefull to change the name of the output directory !!!!
+by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files [metator/output_MetaTOR/]). Be carefull to change the name of the output directory !!!!
 
 WARNING !!!   the command only generates the contact map files but not the pdf files. To generate an image file, we will use hicstuff and several command lines:
 
@@ -191,7 +212,7 @@ hicstuff rebin --help
  here is example of a command line to rebin a contactmap to 10kb
 
 ```sh
-hicstuff rebin -f contact_map_1/fragments_list.txt -c contact_map_1/info_contigs.txt -b 10kb contact_map_1/abs_fragments_contacts_weighted.txt contact_map_1/map_10Kb
+hicstuff rebin -f contact_map_1/NODE_1078_len_298687.frags.tsv -c contact_map_1/NODE_1078_len_298687.chr.tsv -b 10kb contact_map_1/NODE_1078_len_298687.mat.tsv contact_map_1/map_10Kb
 ```
 
 you can now generate the image file using a script located here: /opt/metagenomics/tp3/
@@ -201,7 +222,7 @@ the script take 4 arguments : 1-the matrix 2-the rebin factor 3-the raw image fi
 NB: the second argument is a binning factor. If you put 1 you will obtain the same binning as previously set with hicstuff rebin.
 
 ```sh
-python3.8  scripts/sparse_mat.py contact_map_1/map_10Kb.mat.tsv 1 contact_map_1/map_10Kb_raw.pdf contact_map_1/map_10Kb_norm.pdf 
+python3  metator/scripts/sparse_mat.py contact_map_1/map_10Kb.mat.tsv 1 contact_map_1/map_10Kb_raw.pdf contact_map_1/map_10Kb_norm.pdf 
 ```
 
 you can now generate the different image files of your different matrices (the largest contig, a MAG ... etc). Be carefull with the binning size and factor when trying to generate matrix for MAGs !!! computation could be time consuming for large MAG with high resolution (few kb). 
