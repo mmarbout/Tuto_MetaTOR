@@ -58,7 +58,7 @@ Here the assembly has been made using ShotGun sequences (PE Illumina sequencing:
 
 in order to perform the binning based on 3D contact, we also need 3C dataset from the same sample.
 
-FastQ Hi-C PE reads can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastQ/]
+FastQ Hi-C PE reads can be found here : [metator/FastQ/]
 
 ```sh
 ls -l metator/FastQ/
