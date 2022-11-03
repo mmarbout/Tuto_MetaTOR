@@ -48,7 +48,7 @@ The folder contain the FastQ files correzsponding to the Hi-C library of the moc
 ls -l metator/
 ```
 
-the assembly can be found here : [/ifb/data/public/teachdata/ebame-2022/metator/FastA/]
+the assembly can be found here : [metator/FastA/]
 
 ```sh
 ls -l metator/FastA/
@@ -115,7 +115,7 @@ metator pipeline --help
 this commands will take a very long time due to the small configuration of your VM...
 
 ```sh
-metator pipeline -v -F -i 10 -a metator/FastA/mock_ass_tot.fa -1 metator/FastQ/lib_3C_for.fastq.gz -2 metator/FastQ/lib_3C_rev.fastq.gz -o output_MetaTOR/
+metator pipeline -v -F -i 10 -a metator/FastA/mock_ass_tot.fa -1 metator/FastQ/lib_3C_for.fastq.gz -2 metator/FastQ/lib_3C_rev.fastq.gz -o out_MetaTOR/
 ```
 
 if the command start without problem and it start the alignment of the data, you can kill the process by doing [ctrl + C]
@@ -123,12 +123,12 @@ if the command start without problem and it start the alignment of the data, you
 MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis. You will find the complete output in the [metator] folder..
 
 ```sh
-ls -l metator/output_MetaTOR/
+ls -l metator/out_MetaTOR/
 ```
 you will also find a log file in the output directory containning the different informations of the whole process.
 
 ```sh
-cat metator/output_MetaTOR/metator_20220413211257.log
+cat metator/out_MetaTOR/metator_20220413211257.log
 ```
 
 MetaTOR allow to restart command at different points of the pipeline. It is possible to redo a faster pipeline by using BAM files or PAIRS files as starting points. As, you can restart the pipeline (will be faster now) by lowering the number of iterations of the louvain algorithm (here we will do 10).
