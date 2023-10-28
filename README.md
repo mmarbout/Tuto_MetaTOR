@@ -30,7 +30,7 @@ if you want more described doc of MetaTOR and the different possibilities offere
 
 Principle of MetaTOR pipeline:
 
-![metator_pipeline](docs/example/images/metator_figure.png)
+![metator_pipeline](docs/example/images/metator_figure_V2.png)
 
 ## Dataset
 
