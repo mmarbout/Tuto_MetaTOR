@@ -153,13 +153,13 @@ ls -l Tuto_MetaTOR_2023/out_MetaTOR/
 you will find info about the contigs and their binning, here:
 
 ```sh
-cat Tuto_MetaTOR_2023/metator/contig_data_final.txt | head
+cat Tuto_MetaTOR_2023/out_MetaTOR/contig_data_final.txt | head
 ```
 
 but also about the MAGs, here:
 
 ```sh
-cat Tuto_MetaTOR_2023/metator/bin_summary.txt | head
+cat Tuto_MetaTOR_2023/out_MetaTOR/bin_summary.txt | head
 ```
 
 NB: the file [binning.txt] allow to use it in ANVIO to clean the MAGs or to have visualization.
@@ -179,7 +179,7 @@ MetaTOR allow to restart command at different points of the pipeline. It is poss
 
 
 ```sh
-metator pipeline -v -F -i 10 --start pair -1 Tuto_MetaTOR_2023/metator/alignment_sorted.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_2/
+metator pipeline -v -F -i 10 --start pair -1 Tuto_MetaTOR_2023/out_MetaTOR/alignment_sorted.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_2/
 ```
 
 We can also make different number of iterations of the louvain algorithm in order to see the variations in the provided output.
@@ -188,7 +188,7 @@ We can also make different number of iterations of the louvain algorithm in orde
 for it in $(seq 1 2 9)
 do
 echo "number of iterations:""$it"
-metator pipeline -v -F -i "$it" --start pair -1 Tuto_MetaTOR_2023/metator/alignment_sorted.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_it"$it"/
+metator pipeline -v -F -i "$it" --start pair -1 Tuto_MetaTOR_2023/out_MetaTOR/alignment_sorted.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_it"$it"/
 echo "FINITO"
 echo ""
 done
@@ -206,10 +206,9 @@ ls -l Tuto_MetaTOR_2023/metator/
 ```
 
 
-
 ## 3D Analysis
 
-3C data and MetaTOR (by it coonexion with our software hicstuff) also allow to generate contact matrices of various genomic object (contigs, bin, MAG, overlapping MAGs).
+3C data and MetaTOR (by it connection with our software hicstuff) also allow to generate contact matrices of various genomic object (contigs, bin, MAG, overlapping MAGs).
 
 the command follow the following rules:
 
