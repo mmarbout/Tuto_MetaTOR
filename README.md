@@ -151,7 +151,7 @@ MetaTOR allow to restart command at different points of the pipeline. It is poss
 The option [-F] is mandatory in order to overwrite the data already written. Here we will restart the pipeline at the PAIRS level.
 
 ```sh
-metator pipeline -v -F -i 10 --start pair -1 Tuto_MetaTOR_2023/output_MetaTOR/alignment_0.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_2/
+metator pipeline -v -F -i 10 --start pair -1 Tuto_MetaTOR_2023/output_MetaTOR/alignment_sorted.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_2/
 ```
 
 We can also make different number of iterations of the louvain algorithm in order to see the variations in the provided output.
@@ -160,7 +160,7 @@ We can also make different number of iterations of the louvain algorithm in orde
 for it in $(seq 1 2 9)
 do
 echo "number of iterations:""$it"
-metator pipeline -v -F -i "$it" --start pair -1 Tuto_MetaTOR_2023/output_MetaTOR/alignment_0.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_it"$it"/
+metator pipeline -v -F -i "$it" --start pair -1 Tuto_MetaTOR_2023/output_MetaTOR/alignment_sorted.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_it"$it"/
 echo "FINITO"
 echo ""
 done
@@ -206,7 +206,7 @@ metator contactmap --help
 now, we can generate one contactmap file
 
 ```sh
-metator contactmap -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -c Tuto_MetaTOR_2023/output_MetaTOR/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR_2023/contact_map_1/ -O contig --pairs Tuto_MetaTOR_2023/output_MetaTOR/alignment_0.pairs.gz -F -f -e HinfI,DpnII
+metator contactmap -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -c Tuto_MetaTOR_2023/output_MetaTOR/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR_2023/contact_map_1/ -O contig --pairs Tuto_MetaTOR_2023/output_MetaTOR/alignment_sorted.pairs.gz -F -f -e HinfI,DpnII
 ```
 
 by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files [metator/output_MetaTOR/]). Be carefull to change the name of the output directory !!!!
