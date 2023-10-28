@@ -135,7 +135,7 @@ using the provided dataset, you can launch the whole pipeline.
 metator pipeline --help
 ```
 
-this commands will take a very long time (45-60 min) due to the small configuration of your VM...
+this commands will take some time (30 min) due to the small configuration of your VM...
 
 ```sh
 metator pipeline -v -F -i 10 -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -1 Tuto_MetaTOR_2023/FastQ/Lib_3C_R1.fq.gz -2 Tuto_MetaTOR_2023/FastQ/Lib_3C_R2.fq.gz -o Tuto_MetaTOR_2023/out_MetaTOR/
