@@ -149,7 +149,7 @@ ls -l Tuto_MetaTOR_2023/out_MetaTOR/
 you will also find a log file in the output directory containning the different informations of the whole process.
 
 ```sh
-cat Tuto_MetaTOR_2023/out_MetaTOR/metator_20220413211257.log
+cat Tuto_MetaTOR_2023/out_MetaTOR/metator_XXXXX.log
 ```
 
 MetaTOR allow to restart command at different points of the pipeline. It is possible to redo a faster pipeline by using BAM files or PAIRS files as starting points. You can restart the pipeline (will be faster now) by lowering the number of iterations of the louvain algorithm (here we will do 10).
