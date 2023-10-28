@@ -118,8 +118,10 @@ There is also a option to run the wole pipeline (end-to-end):
 
 There are a number of other, optional, miscellaneous actions:
 
+* `qc` : Generates some quality check on the output of metator.
 * `contactmap` : Generates a contact map from one bin from the final ouptut of metaTOR.
 * `scaffold` : try to scaffold a well covered bin from the final ouptut of metaTOR.
+* `pairs` : Sort the pairs file using pairtools. Compress them using bgzip. Index them using pairix.
 
 * `version` : display current version number.
 
