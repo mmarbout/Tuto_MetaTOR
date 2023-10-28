@@ -179,7 +179,7 @@ MetaTOR allow to restart command at different points of the pipeline. It is poss
 
 
 ```sh
-metator pipeline -v -F -i 10 --start pair -1 Tuto_MetaTOR_2023/out_MetaTOR/alignment_sorted.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_2/
+metator pipeline -v -F -i 10 --start pair -1 Tuto_MetaTOR_2023/out_MetaTOR/alignment_0_sorted.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_2/
 ```
 
 We can also make different number of iterations of the louvain algorithm in order to see the variations in the provided output.
@@ -188,7 +188,7 @@ We can also make different number of iterations of the louvain algorithm in orde
 for it in $(seq 1 2 9)
 do
 echo "number of iterations:""$it"
-metator pipeline -v -F -i "$it" --start pair -1 Tuto_MetaTOR_2023/out_MetaTOR/alignment_sorted.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_it"$it"/
+metator pipeline -v -F -i "$it" --start pair -1 Tuto_MetaTOR_2023/out_MetaTOR/alignment_0_sorted.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_it"$it"/
 echo "FINITO"
 echo ""
 done
