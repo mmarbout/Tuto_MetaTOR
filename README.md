@@ -6,6 +6,7 @@ For this session we will learn how to use 3C/Hi-C data and MetaTOR to perform th
 
 * [MetaTOR](#MetaTOR)
 * [Dataset](#Dataset)
+* [Machine_Configuration](#Config)
 * [Usage](#Usage)
 * [End-to-End pipeline](#End-to-End-pipeline)
 * [Output files](#Output-files)
@@ -77,6 +78,8 @@ FastQ Hi-C PE reads can be found here : [Tuto_MetaTOR_2023/FastQ/]
 ```sh
 ls -l Tuto_MetaTOR_2023/FastQ/
 ```
+
+## Config
 
 First of all, we have to activate the environment in conda
 
