@@ -257,7 +257,7 @@ hicstuff view -b 10kb -o Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687_10
 ```
 
 in this case, the contact map will be generated using the raw score of interactions.
-in general, we nned to perform a normalization of the signal.
+in general, we need to perform a normalization of the signal.
 
 * [Normalization of a chromosomal contact map](https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-13-436), Axel Cournac, Hervé Marie-Nelly, Martial Marbouty, Romain Koszul & Julien Mozziconacci, BMC Genomics, 2012
 
