@@ -38,30 +38,44 @@ In this analysis, we will use a simple metagenomic dataset with a defined commun
 
 the different data for the tutorial need to be copied on your VM from the public space:
 
+option 1 - data are available on the public partition storage of your VM
+
 ```sh
-cp -r /ifb/data/public/teachdata/ebame-2022/metator/ ./
+cp -r /ifb/data/public/teachdata/ebame-2023/Tuto_MetaTOR_2023/ ./
 ```
+
+option 2 - data can be downloaded here (longer)
+
+```sh
+wget https://dl.pasteur.fr/fop/FSY9ieKD/Tuto_MetaTOR_2023.tar.gz
+```
+ and they also need to be decompressed
+
+ ```sh
+tar -xvf Tuto_MetaTOR_2023.tar.gz
+```
+
 
 The folder contain the FastQ files correzsponding to the Hi-C library of the mock community, the FastA files of the assembly and others folder we will use later.
 
 ```sh
-ls -l metator/
+ls -l Tuto_MetaTOR_2023/
 ```
 
 the assembly can be found here : [metator/FastA/]
 
 ```sh
-ls -l metator/FastA/
+ls -l Tuto_MetaTOR_2023/FastA/
 ```
 
-Here the assembly has been made using ShotGun sequences (PE Illumina sequencing: 2x75bp, NextSeq500). Before building the assembly reads were filtered and trimmed using Cutadapt (v1.9.1). Here the assembly have been build using Megahit (v1.1.1.2) with default paramters.
+Here the assembly has been made using ShotGun sequences (PE Illumina sequencing: 2x75bp, NextSeq500). Before building the assembly reads were filtered and trimmed using Cutadapt (v1.9.1). The assembly has been then obtained using Megahit (v1.1.1.2) with default paramters.
 
 in order to perform the binning based on 3D contact, we also need 3C dataset from the same sample.
 
-FastQ Hi-C PE reads can be found here : [metator/FastQ/]
+FastQ Hi-C PE reads can be found here : [Tuto_MetaTOR_2023/FastQ/]
 
 ```sh
-ls -l metator/FastQ/
+ls -l Tuto_MetaTOR_2023/FastQ/
 ```
 
 First of all, we have to activate the environment in conda
@@ -73,7 +87,7 @@ conda activate metator
 than, you will need to provide the PATH to the clustering algorithm. In our case we will use the louvain algorithm.
 
 ```sh
-export LOUVAIN_PATH=metator/scripts/gen-louvain/
+export LOUVAIN_PATH=Tuto_MetaTOR_2023/scripts/gen-louvain/
 ```
 
 ## Usage
@@ -99,6 +113,7 @@ There are a number of other, optional, miscellaneous actions:
 
 * `pipeline` : Run all three of the above actions sequentially or only some of them depending on the arguments given. This can take a while.
 * `contactmap` : Generates a contact map from one bin from the final ouptut of metaTOR.
+* `scaffold` : try to scaffold a well covered bin from the final ouptut of metaTOR.
 
 * `version` : display current version number.
 
@@ -106,36 +121,34 @@ There are a number of other, optional, miscellaneous actions:
 
 ## End-to-End pipeline
 
-using the provided dataset, you can launch the whole pipeline. You will skeep the validation step as checkM is a very consuming software (40 Go RAM) unable to run on your VM.
+using the provided dataset, you can launch the whole pipeline.
 
 ```sh
 metator pipeline --help
 ```
 
-this commands will take a very long time due to the small configuration of your VM...
+this commands will take a very long time (45-60 min) due to the small configuration of your VM...
 
 ```sh
-metator pipeline -v -F -i 10 -a metator/FastA/mock_ass_tot.fa -1 metator/FastQ/lib_3C_for.fastq.gz -2 metator/FastQ/lib_3C_rev.fastq.gz -o out_MetaTOR/
+metator pipeline -v -F -i 10 -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -1 Tuto_MetaTOR_2023/FastQ/lib_3C_for.fastq.gz -2 Tuto_MetaTOR_2023/FastQ/lib_3C_rev.fastq.gz -o Tuto_MetaTOR_2023/out_MetaTOR/
 ```
-
-if the command start without problem and it start the alignment of the data, you can kill the process by doing [ctrl + C]
 
 MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis. You will find the complete output in the [metator] folder..
 
 ```sh
-ls -l metator/out_MetaTOR/
+ls -l Tuto_MetaTOR_2023/out_MetaTOR/
 ```
 you will also find a log file in the output directory containning the different informations of the whole process.
 
 ```sh
-cat metator/out_MetaTOR/metator_20220413211257.log
+cat Tuto_MetaTOR_2023/out_MetaTOR/metator_20220413211257.log
 ```
 
-MetaTOR allow to restart command at different points of the pipeline. It is possible to redo a faster pipeline by using BAM files or PAIRS files as starting points. As, you can restart the pipeline (will be faster now) by lowering the number of iterations of the louvain algorithm (here we will do 10).
-Due to the memory comsuption of CheckM, you have to provide the option [-v] to avoid the recursive procedure and the evaluation of the bins obtained by CheckM. The option [-F] is mandatory in order to overwrite the data already written. Here we will restart the pipeline at the PAIRS level.
+MetaTOR allow to restart command at different points of the pipeline. It is possible to redo a faster pipeline by using BAM files or PAIRS files as starting points. You can restart the pipeline (will be faster now) by lowering the number of iterations of the louvain algorithm (here we will do 10).
+The option [-F] is mandatory in order to overwrite the data already written. Here we will restart the pipeline at the PAIRS level.
 
 ```sh
-metator pipeline -v -F -i 10 --start pair -1 metator/output_MetaTOR/alignment_0.pairs -a metator/FastA/mock_ass_tot.fa -o out_MetaTOR_2/
+metator pipeline -v -F -i 10 --start pair -1 Tuto_MetaTOR_2023/output_MetaTOR/alignment_0.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_2/
 ```
 
 We can also make different number of iterations of the louvain algorithm in order to see the variations in the provided output.
@@ -144,7 +157,7 @@ We can also make different number of iterations of the louvain algorithm in orde
 for it in $(seq 1 2 9)
 do
 echo "number of iterations:""$it"
-metator pipeline -v -F -i "$it" --start pair -1 metator/output_MetaTOR/alignment_0.pairs -a metator/FastA/mock_ass_tot.fa -o out_MetaTOR_it"$it"/
+metator pipeline -v -F -i "$it" --start pair -1 Tuto_MetaTOR_2023/output_MetaTOR/alignment_0.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_it"$it"/
 echo "FINITO"
 echo ""
 done
@@ -153,12 +166,12 @@ done
 
 ## Output files
 
-As we have launch the pileine without the checkM validation, the output files are not complete. MetaTOR use checkM to validate MAGs and to select MAGs that need to be cleaned through a recursive process of the algorithm. Indeed, in very large network (which is not the case here), the algorithm suffer from resolution limits and need sometimes to be re-run on sub-network.
+MetaTOR use checkM to validate MAGs and to select MAGs that need to be cleaned through a recursive process of the algorithm. Indeed, in very large network (which is not the case here), the algorithm suffer from resolution limits and need sometimes to be re-run on sub-network.
 
 You will find the complete output files at the following path:
 
 ```sh
-ls -l metator/output_MetaTOR/
+ls -l Tuto_MetaTOR_2023/output_MetaTOR/
 ```
 
 you can explore the different files. MetaTOR also generates different plot / image file concerning the MAGs obtained and the binning of the assembly.
