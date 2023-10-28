@@ -109,9 +109,12 @@ following order:
 
 * `validation` : Use CheckM to validate the bins, then do a recursive decontamination step to remove contamination.
 
-There are a number of other, optional, miscellaneous actions:
+There is also a option to run the wole pipeline (end-to-end):
 
 * `pipeline` : Run all three of the above actions sequentially or only some of them depending on the arguments given. This can take a while.
+
+There are a number of other, optional, miscellaneous actions:
+
 * `contactmap` : Generates a contact map from one bin from the final ouptut of metaTOR.
 * `scaffold` : try to scaffold a well covered bin from the final ouptut of metaTOR.
 
@@ -166,7 +169,7 @@ done
 
 ## Output files
 
-MetaTOR use checkM to validate MAGs and to select MAGs that need to be cleaned through a recursive process of the algorithm. Indeed, in very large network (which is not the case here), the algorithm suffer from resolution limits and need sometimes to be re-run on sub-network.
+MetaTOR use the software miComplete to validate MAGs and to select MAGs that need to be cleaned through a recursive process of the algorithm. Indeed, in very large network (which is not the case here), the algorithm suffer from resolution limits and need sometimes to be re-run on sub-network. The software is a bit less precise than CheckM but is really faster and less memory consuming. Generally, at the end of the pipeline, we use CheckM or GTDB-tk to assess properly the quality of the retrieved MAGs and annotate them.
 
 You will find the complete output files at the following path:
 
@@ -179,16 +182,16 @@ you can explore the different files. MetaTOR also generates different plot / ima
 you will find info about the contigs
 
 ```sh
-cat metator/output_MetaTOR/contig_data_final.txt | head
+cat Tuto_MetaTOR_2023/output_MetaTOR/contig_data_final.txt | head
 ```
 
 but also about the MAGs
 
 ```sh
-cat metator/output_MetaTOR/bin_summary.txt | head
+cat Tuto_MetaTOR_2023/output_MetaTOR/bin_summary.txt | head
 ```
 
-NB: the file [binning.txt] allow to use it in ANVIO
+NB: the file [binning.txt] allow to use it in ANVIO to clean the MAGs or to have visualization.
 
 ## 3D Analysis
 
@@ -203,7 +206,7 @@ metator contactmap --help
 now, we can generate one contactmap file
 
 ```sh
-metator contactmap -a metator/FastA/mock_ass_tot.fa -c metator/output_MetaTOR/contig_data_final.txt -n "NODE_1078_len_298687" -o contact_map_1/ -O contig --pairs metator/output_MetaTOR/alignment_0.pairs -F -f -e HinfI,DpnII
+metator contactmap -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -c Tuto_MetaTOR_2023/output_MetaTOR/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR_2023/contact_map_1/ -O contig --pairs Tuto_MetaTOR_2023/output_MetaTOR/alignment_0.pairs.gz -F -f -e HinfI,DpnII
 ```
 
 by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files [metator/output_MetaTOR/]). Be carefull to change the name of the output directory !!!!
@@ -225,23 +228,49 @@ hicstuff rebin --help
  here is example of a command line to rebin a contactmap to 10kb
 
 ```sh
-hicstuff rebin -f contact_map_1/NODE_1078_len_298687.frags.tsv -c contact_map_1/NODE_1078_len_298687.chr.tsv -b 10kb contact_map_1/NODE_1078_len_298687.mat.tsv contact_map_1/map_10Kb
+hicstuff rebin -b 10kb -f Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.frags.tsv -c Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.chr.tsv Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.mat.tsv Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687_10kb
 ```
 
-you can now generate the image file using a script located here: /opt/metagenomics/tp3/
-
-the script take 4 arguments : 1-the matrix 2-the rebin factor 3-the raw image file 4-the normalized image file
-
-NB: the second argument is a binning factor. If you put 1 you will obtain the same binning as previously set with hicstuff rebin.
+another command of the hicstuff pipeline allow to directly rebin a matrix and generate a image file of the contact map
 
 ```sh
-python3  metator/scripts/sparse_mat.py contact_map_1/map_10Kb.mat.tsv 1 contact_map_1/map_10Kb_raw.pdf contact_map_1/map_10Kb_norm.pdf 
+hicstuff view --help 
+```
+
+here is example of a command line to rebin a contactmap to 10kb and generate the corresponding pdf file
+
+```sh
+hicstuff view -b 10kb -o Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687_10kb_raw.pdf -f Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.frags.tsv -c Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.chr.tsv Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.mat.tsv
+```
+
+in this case, the contact map will be generated using the raw score of interactions.
+in general, we nned to perform a normalization of the signal.
+
+* [Normalization of a chromosomal contact map](https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-13-436), Axel Cournac, Hervé Marie-Nelly, Martial Marbouty, Romain Koszul & Julien Mozziconacci, BMC Genomics, 2012
+
+same command line but with the normalization step
+
+```sh
+hicstuff view -b 10kb -n -o Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687_10kb_norm.pdf -f Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.frags.tsv -c Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.chr.tsv Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.mat.tsv
 ```
 
 you can now generate the different image files of your different matrices (the largest contig, a MAG ... etc). Be carefull with the binning size and factor when trying to generate matrix for MAGs !!! computation could be time consuming for large MAG with high resolution (few kb). 
 
 if you want to go further ,i have provided various matrix (community, bacteria) at high resolution in the folder [/data_matrices/]. You can have a look and generate some contact matrices. Be carefull with the mock community data as the matrix is quite big.
 
+and if you want are really interested in HiC data and contact map visualization adnd treatment, several tools are now availble to handle this type type of data:
+
+1-cooler: 
+Cooler is a support library for a sparse, compressed, binary persistent storage format, also called cooler, used to store genomic interaction data, such as Hi-C contact matrices.
+The cooler file format is an implementation of a genomic matrix data model using HDF5 as the container format. The cooler package includes a suite of command line tools and a Python API to facilitate creating, querying and manipulating cooler files.
+
+[cooler](https://github.com/open2c/cooler)
+
+2-HiContacts:
+HiContacts provides tools to investigate (m)cool matrices imported in R by HiCExperiment.
+It leverages the HiCExperiment class of objects, built on pre-existing Bioconductor objects, namely InteractionSet, GInterations and ContactMatrix (Lun, Perry & Ing-Simmons, F1000Research 2016), and provides analytical and visualization tools to investigate contact maps.
+
+[HiContacts](https://github.com/js2264/HiContacts)
 
 ## References
 
