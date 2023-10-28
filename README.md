@@ -73,7 +73,7 @@ Here the assembly has been made using ShotGun sequences (PE Illumina sequencing:
 
 in order to perform the binning based on 3D contact, we also need 3C dataset from the same sample.
 
-FastQ Hi-C PE reads can be found here : [Tuto_MetaTOR_2023/FastQ/]
+FastQ Hi-C PE reads can be found here (small part of the whole dataset): [Tuto_MetaTOR_2023/FastQ/]
 
 ```sh
 ls -l Tuto_MetaTOR_2023/FastQ/
@@ -141,19 +141,44 @@ this commands will take some time (30 min) due to the small configuration of you
 metator pipeline -v -F -i 10 -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -1 Tuto_MetaTOR_2023/FastQ/Lib_3C_R1.fq.gz -2 Tuto_MetaTOR_2023/FastQ/Lib_3C_R2.fq.gz -o Tuto_MetaTOR_2023/out_MetaTOR/
 ```
 
+NB: The option [-F] is mandatory if the putput directory already exist.
+
+
 MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis. You will find the complete output in the [metator] folder..
 
 ```sh
 ls -l Tuto_MetaTOR_2023/out_MetaTOR/
 ```
+
+you will find info about the contigs and their binning, here:
+
+```sh
+cat Tuto_MetaTOR_2023/metator/contig_data_final.txt | head
+```
+
+but also about the MAGs, here:
+
+```sh
+cat Tuto_MetaTOR_2023/metator/bin_summary.txt | head
+```
+
+NB: the file [binning.txt] allow to use it in ANVIO to clean the MAGs or to have visualization.
+
+
 you will also find a log file in the output directory containning the different informations of the whole process.
 
 ```sh
 cat Tuto_MetaTOR_2023/out_MetaTOR/metator_XXXXX.log
 ```
 
-MetaTOR allow to restart command at different points of the pipeline. It is possible to redo a faster pipeline by using BAM files or PAIRS files as starting points. You can restart the pipeline (will be faster now) by lowering the number of iterations of the louvain algorithm (here we will do 10).
-The option [-F] is mandatory in order to overwrite the data already written. Here we will restart the pipeline at the PAIRS level.
+you can explore the different files. MetaTOR also generates different plot / image file concerning the MAGs obtained and the binning of the assembly.
+
+<p align="center">
+  <img src="docs/example/images/img_output_metator.png" width="200">
+</p>
+
+MetaTOR allow to restart command at different points of the pipeline. It is possible to redo a faster pipeline by using BAM files or PAIRS files as starting points. You can restart the pipeline with a different number of iterations of the louvain algorithm. Here we will restart the pipeline at the PAIRS level.
+
 
 ```sh
 metator pipeline -v -F -i 10 --start pair -1 Tuto_MetaTOR_2023/metator/alignment_sorted.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_2/
@@ -176,27 +201,13 @@ done
 
 MetaTOR use the software miComplete to validate MAGs and to select MAGs that need to be cleaned through a recursive process of the algorithm. Indeed, in very large network (which is not the case here), the algorithm suffer from resolution limits and need sometimes to be re-run on sub-network. The software is a bit less precise than CheckM but is really faster and less memory consuming. Generally, at the end of the pipeline, we use CheckM or GTDB-tk to assess properly the quality of the retrieved MAGs and annotate them.
 
-You will find the complete output files at the following path:
+You will find the complete output files obtained using the whole dataset (around 90 Millions of PE reads) at the following path:
 
 ```sh
 ls -l Tuto_MetaTOR_2023/metator/
 ```
 
-you can explore the different files. MetaTOR also generates different plot / image file concerning the MAGs obtained and the binning of the assembly.
 
-you will find info about the contigs
-
-```sh
-cat Tuto_MetaTOR_2023/metator/contig_data_final.txt | head
-```
-
-but also about the MAGs
-
-```sh
-cat Tuto_MetaTOR_2023/metator/bin_summary.txt | head
-```
-
-NB: the file [binning.txt] allow to use it in ANVIO to clean the MAGs or to have visualization.
 
 ## 3D Analysis
 
