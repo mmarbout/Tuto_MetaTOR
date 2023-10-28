@@ -219,7 +219,7 @@ metator contactmap --help
 now, we can generate one contactmap file
 
 ```sh
-metator contactmap -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -c Tuto_MetaTOR_2023/metator/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR_2023/contact_map_1/ -O contig --pairs Tuto_MetaTOR_2023/metator/alignment_sorted.pairs.gz -F -f -e HinfI,DpnII
+metator contactmap -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -c Tuto_MetaTOR_2023/metator/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR_2023/contact_map_1/ -O contig -F -f -e HinfI,DpnII Tuto_MetaTOR_2023/metator/alignment_sorted.pairs.gz
 ```
 
 by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files [metator/output_MetaTOR/]). Be carefull to change the name of the output directory !!!!
