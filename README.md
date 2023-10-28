@@ -138,7 +138,7 @@ metator pipeline --help
 this commands will take a very long time (45-60 min) due to the small configuration of your VM...
 
 ```sh
-metator pipeline -v -F -i 10 -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -1 Tuto_MetaTOR_2023/FastQ/lib_3C_for.fastq.gz -2 Tuto_MetaTOR_2023/FastQ/lib_3C_rev.fastq.gz -o Tuto_MetaTOR_2023/out_MetaTOR/
+metator pipeline -v -F -i 10 -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -1 Tuto_MetaTOR_2023/FastQ/Lib_3C_R1.fq.gz -2 Tuto_MetaTOR_2023/FastQ/Lib_3C_R2.fq.gz -o Tuto_MetaTOR_2023/out_MetaTOR/
 ```
 
 MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis. You will find the complete output in the [metator] folder..
