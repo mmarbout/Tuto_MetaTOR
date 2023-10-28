@@ -173,9 +173,7 @@ cat Tuto_MetaTOR_2023/out_MetaTOR/metator_XXXXX.log
 
 you can explore the different files. MetaTOR also generates different plot / image file concerning the MAGs obtained and the binning of the assembly.
 
-<p align="center">
-  <img src="docs/example/images/img_output_metator.png" width="200">
-</p>
+![metator_output_plot](docs/example/images/img_output_metator.png)
 
 MetaTOR allow to restart command at different points of the pipeline. It is possible to redo a faster pipeline by using BAM files or PAIRS files as starting points. You can restart the pipeline with a different number of iterations of the louvain algorithm. Here we will restart the pipeline at the PAIRS level.
 
