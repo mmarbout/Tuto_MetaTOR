@@ -253,7 +253,7 @@ hicstuff view --help
 here is example of a command line to rebin a contactmap to 10kb and generate the corresponding pdf file
 
 ```sh
-hicstuff view -b 10kb -o Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687_10kb_raw.pdf -f Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.frags.tsv -c Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.chr.tsv Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.mat.tsv
+hicstuff view -b 10kb -o Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687_10kb_raw.pdf -f Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.frags.tsv Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.mat.tsv
 ```
 
 in this case, the contact map will be generated using the raw score of interactions.
@@ -264,7 +264,7 @@ in general, we nned to perform a normalization of the signal.
 same command line but with the normalization step
 
 ```sh
-hicstuff view -b 10kb -n -o Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687_10kb_norm.pdf -f Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.frags.tsv -c Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.chr.tsv Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.mat.tsv
+hicstuff view -b 10kb -n -o Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687_10kb_norm.pdf -f Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.frags.tsv Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.mat.tsv
 ```
 
 you can now generate the different image files of your different matrices (the largest contig, a MAG ... etc). Be carefull with the binning size and factor when trying to generate matrix for MAGs !!! computation could be time consuming for large MAG with high resolution (few kb). 
