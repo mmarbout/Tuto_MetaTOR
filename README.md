@@ -42,31 +42,32 @@ the different data for the tutorial need to be copied on your VM from the public
 option 1 - data are available on the public partition storage of your VM
 
 ```sh
-cp -r /ifb/data/public/teachdata/ebame-2023/Tuto_MetaTOR_2023/ ./
+cp -r /ifb/data/public/teachdata/ebame-2024/Tuto_MetaTOR.tar.gz ./
 ```
 
 option 2 - data can be downloaded here (longer)
 
 ```sh
-wget https://dl.pasteur.fr/fop/FSY9ieKD/Tuto_MetaTOR_2023.tar.gz
+wget "https://dl.pasteur.fr/fop/FSY9ieKD/Tuto_MetaTOR_2023.tar.gz](https://filesender.renater.fr/?s=download&token=1ed92571-9731-4c01-878b-2bdfc2d36735" -O MetaTOR
 ```
  and they also need to be decompressed
 
  ```sh
-tar -xvf Tuto_MetaTOR_2023.tar.gz
+cd MetaTOR
+tar -xvf Tuto_MetaTOR.tar.gz
 ```
 
 
 The folder contain the FastQ files correzsponding to the Hi-C library of the mock community, the FastA files of the assembly and others folder we will use later.
 
 ```sh
-ls -l Tuto_MetaTOR_2023/
+ls -l Tuto_MetaTOR/
 ```
 
-the assembly can be found here : [metator/FastA/]
+the assembly can be found here : [Tuto_MetaTOR/assembly]
 
 ```sh
-ls -l Tuto_MetaTOR_2023/FastA/
+ls -l Tuto_MetaTOR/assembly/
 ```
 
 Here the assembly has been made using ShotGun sequences (PE Illumina sequencing: 2x75bp, NextSeq500). Before building the assembly reads were filtered and trimmed using Cutadapt (v1.9.1). The assembly has been then obtained using Megahit (v1.1.1.2) with default paramters.
@@ -76,7 +77,7 @@ in order to perform the binning based on 3D contact, we also need 3C dataset fro
 FastQ Hi-C PE reads can be found here (small part of the whole dataset): [Tuto_MetaTOR_2023/FastQ/]
 
 ```sh
-ls -l Tuto_MetaTOR_2023/FastQ/
+ls -l Tuto_MetaTOR/FastQ/
 ```
 
 ## Config
@@ -90,7 +91,7 @@ conda activate metator
 than, you will need to provide the PATH to the clustering algorithm. In our case we will use the louvain algorithm.
 
 ```sh
-export LOUVAIN_PATH=Tuto_MetaTOR_2023/gen-louvain/
+export LOUVAIN_PATH=Tuto_MetaTOR/gen-louvain/
 ```
 
 ## Usage
@@ -138,7 +139,7 @@ metator pipeline --help
 this commands will take some time (30 min) due to the small configuration of your VM...
 
 ```sh
-metator pipeline -v -F -i 10 -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -1 Tuto_MetaTOR_2023/FastQ/Lib_3C_R1.fq.gz -2 Tuto_MetaTOR_2023/FastQ/Lib_3C_R2.fq.gz -o Tuto_MetaTOR_2023/out_MetaTOR/
+metator pipeline -v -F -i 10 -a Tuto_MetaTOR/assembly/assembly_mock.fa -1 Tuto_MetaTOR/FastQ/Lib_3C_R1.fq.gz -2 Tuto_MetaTOR/FastQ/Lib_3C_R2.fq.gz -o Tuto_MetaTOR/out_MetaTOR/
 ```
 
 NB: The option [-F] is mandatory if the putput directory already exist.
@@ -147,19 +148,19 @@ NB: The option [-F] is mandatory if the putput directory already exist.
 MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis. You will find the complete output in the [metator] folder..
 
 ```sh
-ls -l Tuto_MetaTOR_2023/out_MetaTOR/
+ls -l Tuto_MetaTOR/out_MetaTOR/
 ```
 
 you will find info about the contigs and their binning, here:
 
 ```sh
-cat Tuto_MetaTOR_2023/out_MetaTOR/contig_data_final.txt | head
+cat Tuto_MetaTOR/out_MetaTOR/contig_data_final.txt | head
 ```
 
 but also about the MAGs, here:
 
 ```sh
-cat Tuto_MetaTOR_2023/out_MetaTOR/bin_summary.txt | head
+cat Tuto_MetaTOR/out_MetaTOR/bin_summary.txt | head
 ```
 
 NB: the file [binning.txt] allow to use it in ANVIO to clean the MAGs or to have visualization.
@@ -168,7 +169,7 @@ NB: the file [binning.txt] allow to use it in ANVIO to clean the MAGs or to have
 you will also find a log file in the output directory containning the different informations of the whole process.
 
 ```sh
-cat Tuto_MetaTOR_2023/out_MetaTOR/metator_XXXXX.log
+cat Tuto_MetaTOR/out_MetaTOR/metator_XXXXX.log
 ```
 
 you can explore the different files. MetaTOR also generates different plot / image file concerning the MAGs obtained and the binning of the assembly.
@@ -179,7 +180,7 @@ MetaTOR allow to restart command at different points of the pipeline. It is poss
 
 
 ```sh
-metator pipeline -v -F -i 10 --start pair -1 Tuto_MetaTOR_2023/out_MetaTOR/alignment_0_sorted.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_2/
+metator pipeline -v -F -i 10 --start pair -1 Tuto_MetaTOR/out_MetaTOR/alignment_0_sorted.pairs.gz -a Tuto_MetaTOR/assembly/assembly_mock.fa -o Tuto_MetaTOR/out_MetaTOR_2/
 ```
 
 We can also make different number of iterations of the louvain algorithm in order to see the variations in the provided output.
@@ -188,7 +189,7 @@ We can also make different number of iterations of the louvain algorithm in orde
 for it in $(seq 1 2 9)
 do
 echo "number of iterations:""$it"
-metator pipeline -v -F -i "$it" --start pair -1 Tuto_MetaTOR_2023/out_MetaTOR/alignment_0_sorted.pairs.gz -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -o Tuto_MetaTOR_2023/out_MetaTOR_it"$it"/
+metator pipeline -v -F -i "$it" --start pair -1 Tuto_MetaTOR/out_MetaTOR/alignment_0_sorted.pairs.gz -a Tuto_MetaTOR/assembly/assembly_mock.fa -o Tuto_MetaTOR/out_MetaTOR_it"$it"/
 echo "FINITO"
 echo ""
 done
@@ -202,7 +203,7 @@ MetaTOR use the software miComplete to validate MAGs and to select MAGs that nee
 You will find the complete output files obtained using the whole dataset (around 90 Millions of PE reads) at the following path:
 
 ```sh
-ls -l Tuto_MetaTOR_2023/metator/
+ls -l Tuto_MetaTOR/metator/
 ```
 
 
@@ -219,7 +220,7 @@ metator contactmap --help
 now, we can generate one contactmap file
 
 ```sh
-metator contactmap -a Tuto_MetaTOR_2023/FastA/mock_ass_tot.fa -c Tuto_MetaTOR_2023/metator/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR_2023/contact_map_1/ -O contig -F -f -e HinfI,DpnII Tuto_MetaTOR_2023/metator/alignment_sorted.pairs.gz
+metator contactmap -a Tuto_MetaTOR/assembly/assembly_mock.fa -c Tuto_MetaTOR/metator/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR/contact_map_1/ -O contig -F -f -e HinfI,DpnII Tuto_MetaTOR/metator/alignment_sorted.pairs.gz
 ```
 
 by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files [metator/output_MetaTOR/]). Be carefull to change the name of the output directory !!!!
@@ -241,7 +242,7 @@ hicstuff rebin --help
  here is example of a command line to rebin a contactmap to 10kb
 
 ```sh
-hicstuff rebin -b 10kb -f Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.frags.tsv -c Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.chr.tsv Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.mat.tsv Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687_10kb
+hicstuff rebin -b 10kb -f Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.frags.tsv -c Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.chr.tsv Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.mat.tsv Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687_10kb
 ```
 
 another command of the hicstuff pipeline allow to directly rebin a matrix and generate a image file of the contact map
@@ -253,7 +254,7 @@ hicstuff view --help
 here is example of a command line to rebin a contactmap to 10kb and generate the corresponding pdf file
 
 ```sh
-hicstuff view -b 10kb -o Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687_10kb_raw.pdf -f Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.frags.tsv Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.mat.tsv
+hicstuff view -b 10kb -o Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687_10kb_raw.pdf -f Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.frags.tsv Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.mat.tsv
 ```
 
 in this case, the contact map will be generated using the raw score of interactions.
@@ -264,7 +265,7 @@ in general, we need to perform a normalization of the signal.
 same command line but with the normalization step
 
 ```sh
-hicstuff view -b 10kb -n -o Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687_10kb_norm.pdf -f Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.frags.tsv Tuto_MetaTOR_2023/contact_map_1/NODE_1078_len_298687.mat.tsv
+hicstuff view -b 10kb -n -o Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687_10kb_norm.pdf -f Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.frags.tsv Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.mat.tsv
 ```
 
 you can now generate the different image files of your different matrices (the largest contig, a MAG ... etc). Be carefull with the binning size and factor when trying to generate matrix for MAGs !!! computation could be time consuming for large MAG with high resolution (few kb). 
