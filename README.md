@@ -48,7 +48,7 @@ cp -r /ifb/data/public/teachdata/ebame-2024/Tuto_MetaTOR.tar.gz ./
 option 2 - data can be downloaded here (longer)
 
 ```sh
-wget "https://dl.pasteur.fr/fop/FSY9ieKD/Tuto_MetaTOR_2023.tar.gz](https://filesender.renater.fr/?s=download&token=1ed92571-9731-4c01-878b-2bdfc2d36735" -O MetaTOR
+wget "https://filesender.renater.fr/?s=download&token=1ed92571-9731-4c01-878b-2bdfc2d36735" -O MetaTOR
 ```
  and they also need to be decompressed
 
