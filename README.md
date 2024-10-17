@@ -90,7 +90,7 @@ conda activate metator
 than, you will need to provide the PATH to the clustering algorithm. In our case we will use the louvain algorithm.
 
 ```sh
-export LOUVAIN_PATH=Tuto_MetaTOR/gen-louvain/
+export LOUVAIN_PATH=~/Tuto_MetaTOR/software/gen-louvain/
 ```
 
 ## Usage
