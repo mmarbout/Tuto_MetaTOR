@@ -203,9 +203,31 @@ MetaTOR use the software miComplete to validate MAGs and to select MAGs that nee
 You will find the complete output files obtained using the whole dataset (around 90 Millions of PE reads) at the following path:
 
 ```sh
-ls -l Tuto_MetaTOR/metator/
+ls -l Tuto_MetaTOR/metator_final/
 ```
 
+## Mobile genetic elements binning
+
+metator also allow to bin MGE based on their contact. the module can be called like that 
+
+```sh
+metator mge --help
+```
+
+the first step is to select the contigs you want to target and to generate a fasta files with these contigs. You will find in the directory [Tuto_MetaTOR/data/mock_genomad/] the output of geNomad on the mock community assembly.
+
+```sh
+mkdir Tuto_MetaTOR/metamge/
+cat Tuto_MetaTOR/data/mock_genomad/mock_plasmid_summary.tsv| sed '1d' | awk '{print $1}' > Tuto_MetaTOR/metamge/target_mge.txt
+cat Tuto_MetaTOR/data/mock_genomad/mock_virus_summary.tsv| sed '1d' | awk '{print $1}' >> Tuto_MetaTOR/metamge/target_mge.txt
+cat Tuto_MetaTOR/data/mock_genomad/mock_plasmid.fna Tuto_MetaTOR/data/mock_genomad/mock_virus.fna > Tuto_MetaTOR/metamge/target_mge.fa
+```
+
+then can launch the module
+
+```sh
+metator mge --network Tuto_MetaTOR/metator_final/network.txt --fasta Tuto_MetaTOR/metamge/target_mge.fa --mges Tuto_MetaTOR/metamge/target_mge.txt --plot --binning Tuto_MetaTOR/metator_final/binning.txt --outdir Tuto_MetaTOR/metamge/ --threads --contigs-data Tuto_MetaTOR/metator_final/contig_data_final.txt
+```
 
 ## 3D Analysis
 
@@ -220,7 +242,7 @@ metator contactmap --help
 now, we can generate one contactmap file
 
 ```sh
-metator contactmap -a Tuto_MetaTOR/assembly/assembly_mock.fa -c Tuto_MetaTOR/metator/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR/contact_map_1/ -O contig -F -f -e HinfI,DpnII Tuto_MetaTOR/metator/alignment_sorted.pairs.gz
+metator contactmap -a Tuto_MetaTOR/assembly/assembly_mock.fa -c Tuto_MetaTOR/metator_final/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR/contact_map_1/ -O contig -F -f -e HinfI,DpnII Tuto_MetaTOR/metator_final/alignment_sorted.pairs.gz
 ```
 
 by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files [metator/output_MetaTOR/]). Be carefull to change the name of the output directory !!!!
