@@ -53,7 +53,6 @@ wget https://dl.pasteur.fr/fop/h5SOGD04/Tuto_MetaTOR.tar.gz
  and they also need to be decompressed
 
  ```sh
-cd MetaTOR
 tar -xvf Tuto_MetaTOR.tar.gz
 ```
 
