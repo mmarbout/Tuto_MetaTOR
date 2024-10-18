@@ -241,6 +241,11 @@ metator contactmap --help
 now, we can generate one contactmap file
 
 ```sh
+mkdir -p Tuto_MetaTOR/contact_map_1/
+```
+
+
+```sh
 metator contactmap -a Tuto_MetaTOR/assembly/assembly_mock.fa -c Tuto_MetaTOR/metator_final/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR/contact_map_1/ -O contig -F -f -e HinfI,DpnII Tuto_MetaTOR/metator_final/alignment_sorted.pairs.gz
 ```
 
