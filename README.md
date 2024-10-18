@@ -225,7 +225,7 @@ cat Tuto_MetaTOR/data/mock_genomad/mock_plasmid.fna Tuto_MetaTOR/data/mock_genom
 then can launch the module
 
 ```sh
-metator mge --network Tuto_MetaTOR/metator_final/network.txt --fasta Tuto_MetaTOR/metamge/target_mge.fa --mges Tuto_MetaTOR/metamge/target_mge.txt --plot --binning Tuto_MetaTOR/metator_final/binning.txt --outdir Tuto_MetaTOR/metamge/ --threads --contigs-data Tuto_MetaTOR/metator_final/contig_data_final.txt
+metator mge --network Tuto_MetaTOR/metator_final/network.txt --fasta Tuto_MetaTOR/metamge/target_mge.fa --mges Tuto_MetaTOR/metamge/target_mge.txt --plot --binning Tuto_MetaTOR/metator_final/binning.txt --outdir Tuto_MetaTOR/metamge/ --threads 2 --contigs-data Tuto_MetaTOR/metator_final/contig_data_final.txt Tuto_MetaTOR/metator_final/alignment_sorted.pairs.gz
 ```
 
 ## 3D Analysis
