@@ -25,7 +25,7 @@ Metagenomic Tridimensional Organisation-based Reassembly
 if you want more described doc of MetaTOR and the different possibilities offered by the pipeline , various tutorials are available at the following links:
 
 * package is available [here](https://github.com/koszullab/metaTOR)
-* A tutorial is available [here](docs/example/metator_tutorial.md) to explain how to use metaTOR. 
+* An advanced tutorial is available [here](docs/example/metator_tutorial.md) to explain how to use metaTOR. 
 * [Anvio](https://merenlab.org/software/anvio/) manual curation of the contaminated bins. Available [here](docs/example/manual_curation_of_metator_MAGs.md).
 * Visualization and scaffolding of the MAGs with the contactmap modules of MetaTOR. Available [here](docs/example/MAG_visualization_and_scaffolding.md).
 
@@ -310,21 +310,22 @@ hicstuff view -b 10kb -n -o Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687_10kb
 
 you can now generate the different image files of your different matrices (the largest contig, a MAG ... etc). Be carefull with the binning size and factor when trying to generate matrix for MAGs !!! computation could be time consuming for large MAG with high resolution (few kb). 
 
-if you want to go further ,i have provided various matrix (community, bacteria) at high resolution in the folder [/data_matrices/]. You can have a look and generate some contact matrices. Be carefull with the mock community data as the matrix is quite big.
+if you want to go further, I have provided a contact map in cool format (see below) of the whole mock community based on the reference genomes. folder [/data/]. You will also find in the same folder some R scripts to manipulate this kind of files using different R packaages. You can have a look, install the packages and generate some contact map. 
+
+* HiContacts:
+HiContacts provides tools to investigate (m)cool matrices imported in R by HiCExperiment.
+It leverages the HiCExperiment class of objects, built on pre-existing Bioconductor objects, namely InteractionSet, GInterations and ContactMatrix (Lun, Perry & Ing-Simmons, F1000Research 2016), and provides analytical and visualization tools to investigate contact maps.
+
+[HiContacts](https://github.com/js2264/HiContacts)
 
 and if you want are really interested in HiC data and contact map visualization adnd treatment, several tools are now availble to handle this type type of data:
 
-1-cooler: 
+* cooler: 
 Cooler is a support library for a sparse, compressed, binary persistent storage format, also called cooler, used to store genomic interaction data, such as Hi-C contact matrices.
 The cooler file format is an implementation of a genomic matrix data model using HDF5 as the container format. The cooler package includes a suite of command line tools and a Python API to facilitate creating, querying and manipulating cooler files.
 
 [cooler](https://github.com/open2c/cooler)
 
-2-HiContacts:
-HiContacts provides tools to investigate (m)cool matrices imported in R by HiCExperiment.
-It leverages the HiCExperiment class of objects, built on pre-existing Bioconductor objects, namely InteractionSet, GInterations and ContactMatrix (Lun, Perry & Ing-Simmons, F1000Research 2016), and provides analytical and visualization tools to investigate contact maps.
-
-[HiContacts](https://github.com/js2264/HiContacts)
 
 ## References
 
