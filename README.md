@@ -235,8 +235,16 @@ metator mge --network Tuto_MetaTOR/metator_final/network.txt --fasta Tuto_MetaTO
 we have to downgrade the hicstuff package ... i hope this won't destroy everything !! 
 
 ```sh
-pip install --force-reinstall -v "hicstuff==3.1.1"
+pip install --force-reinstall -v "hicstuff==2.3.1"
 ```
+
+and we also have to install a package not included in this version of hicstuff
+
+```sh
+pip install cooler
+```
+
+ok ... everything should be ok now and we can start playing with the contact map !!
 
 the command follow the following rules:
 
