@@ -230,7 +230,13 @@ metator mge --network Tuto_MetaTOR/metator_final/network.txt --fasta Tuto_MetaTO
 
 ## 3D Analysis
 
-3C data and MetaTOR (by it connection with our software hicstuff) also allow to generate contact matrices of various genomic object (contigs, bin, MAG, overlapping MAGs).
+3C data and MetaTOR (by it connection with our software hicstuff) also allow to generate contact matrices of various genomic object (contigs, bin, MAG, overlapping MAGs). However, i jsut realize that the last version of a package is no more compatible with our pipeline :(((
+
+we have to downgrade the hicstuff package ... i hope this won't destroy everything !! 
+
+```sh
+pip install --force-reinstall -v "hicstuff==3.1.1"
+```
 
 the command follow the following rules:
 
