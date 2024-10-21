@@ -42,7 +42,7 @@ the different data for the tutorial need to be copied on your VM from the public
 option 1 - data are available on the public partition storage of your VM
 
 ```sh
-cp  -r /ifb/data/public/teachdata/ebame/MetaTOR/MetaTOR ./
+cp  -r /ifb/data/public/teachdata/ebame/MetaTOR ./
 ```
 
 option 2 - data can be downloaded here (longer)
