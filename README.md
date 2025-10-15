@@ -87,12 +87,6 @@ First of all, we have to activate the environment in conda
 conda activate metator
 ```
 
-than, you will need to provide the PATH to the clustering algorithm. In our case we will use the louvain algorithm.
-
-```sh
-export LOUVAIN_PATH=~/Tuto_MetaTOR/software/gen-louvain/
-```
-
 ## Usage
 
 MetaTOR is a modular pipeline allowing to perform each step separetly or in an end to end pipeline
@@ -138,7 +132,7 @@ metator pipeline --help
 this commands will take some time (30 min) due to the small configuration of your VM...
 
 ```sh
-metator pipeline -v -F -i 10 -a Tuto_MetaTOR/assembly/assembly_mock.fa -1 Tuto_MetaTOR/FastQ/Lib_3C_R1.fq.gz -2 Tuto_MetaTOR/FastQ/Lib_3C_R2.fq.gz -o Tuto_MetaTOR/out_MetaTOR/
+metator pipeline -v -F -i 10 -a Tuto_MetaTOR/assembly/assembly_mock.fa -1 Tuto_MetaTOR/FastQ/lib1_3C_R1.fq.gz -2 Tuto_MetaTOR/FastQ/lib1_3C_R2.fq.gz -o Tuto_MetaTOR/out_MetaTOR/
 ```
 
 NB: The option [-F] is mandatory if the putput directory already exist.
