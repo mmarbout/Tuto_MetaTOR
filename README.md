@@ -195,15 +195,15 @@ metator contactmap --help
 now, we can generate one contactmap file
 
 ```sh
-mkdir -p Tuto_MetaTOR/contact_map_1/
+mkdir -p Tuto_MetaTOR/contact_map/
 ```
 
 
 ```sh
-metator contactmap -a Tuto_MetaTOR/assembly/assembly_mock.fa -c Tuto_MetaTOR/metator_final/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR/contact_map_1/ -O contig -F -f -e HinfI,DpnII Tuto_MetaTOR/MetaTOR/alignment_sorted.pairs.gz
+metator contactmap -a Tuto_MetaTOR/assembly/assembly_mock.fa -c Tuto_MetaTOR/MetaTORl/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR/contact_map/ -O contig -F -f -e HinfI,DpnII Tuto_MetaTOR/MetaTOR/alignment_sorted.pairs.gz
 ```
 
-by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files [metator/output_MetaTOR/]). Be carefull to change the name of the output directory !!!!
+by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files [Tuto_MetaTOR/MetaTOR]). Be carefull to change the name of the output directory !!!!
 
 WARNING !!!   the command only generates the contact map files but not the pdf files. To generate an image file, we will use hicstuff and several command lines:
 
@@ -222,7 +222,7 @@ hicstuff rebin --help
  here is example of a command line to rebin a contactmap to 10kb
 
 ```sh
-hicstuff rebin -b 10kb -f Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.frags.tsv -c Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.chr.tsv Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.mat.tsv Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687_10kb
+hicstuff rebin -b 10kb -f Tuto_MetaTOR/contact_map/NODE_1078_len_298687.frags.tsv -c Tuto_MetaTOR/contact_map/NODE_1078_len_298687.chr.tsv Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.mat.tsv Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687_10kb
 ```
 
 another command of the hicstuff pipeline allow to directly rebin a matrix and generate a image file of the contact map
@@ -234,7 +234,7 @@ hicstuff view --help
 here is example of a command line to rebin a contactmap to 10kb and generate the corresponding pdf file
 
 ```sh
-hicstuff view -b 10kb -o Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687_10kb_raw.pdf -f Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.frags.tsv Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.mat.tsv
+hicstuff view -b 10kb -o Tuto_MetaTOR/contact_map/NODE_1078_len_298687_10kb_raw.pdf -f Tuto_MetaTOR/contact_map/NODE_1078_len_298687.frags.tsv Tuto_MetaTOR/contact_map/NODE_1078_len_298687.mat.tsv
 ```
 
 in this case, the contact map will be generated using the raw score of interactions.
@@ -245,7 +245,7 @@ in general, we need to perform a normalization of the signal.
 same command line but with the normalization step
 
 ```sh
-hicstuff view -b 10kb -n -o Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687_10kb_norm.pdf -f Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.frags.tsv Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.mat.tsv
+hicstuff view -b 10kb -n -o Tuto_MetaTOR/contact_map/NODE_1078_len_298687_10kb_norm.pdf -f Tuto_MetaTOR/contact_map/NODE_1078_len_298687.frags.tsv Tuto_MetaTOR/contact_map/NODE_1078_len_298687.mat.tsv
 ```
 
 you can now generate the different image files of your different matrices (the largest contig, a MAG ... etc). Be carefull with the binning size and factor when trying to generate matrix for MAGs !!! computation could be time consuming for large MAG with high resolution (few kb). 
@@ -266,7 +266,7 @@ The cooler file format is an implementation of a genomic matrix data model using
 
 ## MGE binning
 
-metator also encompass two new modules (still in construction for a good integration) metator mge and metator host that allow to perform binning of MGE annotated contigs and associate them to their host.
+metator will soon encompass two new modules (still in construction for a good integration) metator mge and metator host that allow to perform binning of MGE annotated contigs and associate them to their host.
 
 the new version should be released soon ... 
 
