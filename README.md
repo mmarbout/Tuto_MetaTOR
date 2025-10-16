@@ -272,6 +272,8 @@ the new version should be released soon ...
 
 in case you want to have a look at it development and what we have done with it:
 
+[Phages with a broad host range are common across ecosystems](https://pasteur.hal.science/pasteur-05269627v1)
+
 
 
 ## References
