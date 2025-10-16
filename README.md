@@ -180,6 +180,7 @@ done
 
 MetaTOR use the software miComplete to validate MAGs and to select MAGs that need to be cleaned through a recursive process of the algorithm. Indeed, in very large network (which is not the case here), the algorithm suffer from resolution limits and need sometimes to be re-run on sub-network. The software is a bit less precise than CheckM but is really faster and less memory consuming. Generally, at the end of the pipeline, we use CheckM or GTDB-tk to assess properly the quality of the retrieved MAGs and annotate them.
 
+you will find in the directory [MetaTOR] the classical output of MetaTOR. 
 
 ## 3D Analysis
 
@@ -199,7 +200,7 @@ mkdir -p Tuto_MetaTOR/contact_map_1/
 
 
 ```sh
-metator contactmap -a Tuto_MetaTOR/assembly/assembly_mock.fa -c Tuto_MetaTOR/metator_final/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR/contact_map_1/ -O contig -F -f -e HinfI,DpnII Tuto_MetaTOR/metator_final/alignment_sorted.pairs.gz
+metator contactmap -a Tuto_MetaTOR/assembly/assembly_mock.fa -c Tuto_MetaTOR/metator_final/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR/contact_map_1/ -O contig -F -f -e HinfI,DpnII Tuto_MetaTOR/MetaTOR/alignment_sorted.pairs.gz
 ```
 
 by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files [metator/output_MetaTOR/]). Be carefull to change the name of the output directory !!!!
@@ -249,8 +250,6 @@ hicstuff view -b 10kb -n -o Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687_10kb
 
 you can now generate the different image files of your different matrices (the largest contig, a MAG ... etc). Be carefull with the binning size and factor when trying to generate matrix for MAGs !!! computation could be time consuming for large MAG with high resolution (few kb). 
 
-if you want to go further, I have provided a contact map in cool format (see below) of the whole mock community based on the reference genomes. folder [/data/]. You will also find in the same folder some R scripts to manipulate this kind of files using different R packaages. You can have a look, install the packages and generate some contact map. 
-
 * HiContacts:
 HiContacts provides tools to investigate (m)cool matrices imported in R by HiCExperiment.
 It leverages the HiCExperiment class of objects, built on pre-existing Bioconductor objects, namely InteractionSet, GInterations and ContactMatrix (Lun, Perry & Ing-Simmons, F1000Research 2016), and provides analytical and visualization tools to investigate contact maps.
@@ -264,6 +263,15 @@ Cooler is a support library for a sparse, compressed, binary persistent storage 
 The cooler file format is an implementation of a genomic matrix data model using HDF5 as the container format. The cooler package includes a suite of command line tools and a Python API to facilitate creating, querying and manipulating cooler files.
 
 [cooler](https://github.com/open2c/cooler)
+
+## MGE binning
+
+metator also encompass two new modules (still in construction for a good integration) metator mge and metator host that allow to perform binning of MGE annotated contigs and associate them to their host.
+
+the new version should be released soon ... 
+
+in case you want to have a look at it development and what we have done with it:
+
 
 
 ## References
