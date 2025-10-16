@@ -158,17 +158,6 @@ cat Tuto_MetaTOR/out_MetaTOR/bin_summary.txt | head
 
 NB: the file [binning.txt] allow to use it in ANVIO to clean the MAGs or to have visualization.
 
-
-you will also find a log file in the output directory containning the different informations of the whole process.
-
-```sh
-cat Tuto_MetaTOR/out_MetaTOR/metator_XXXXX.log
-```
-
-you can explore the different files. MetaTOR also generates different plot / image file concerning the MAGs obtained and the binning of the assembly.
-
-![metator_output_plot](docs/example/images/img_output_metator.png)
-
 MetaTOR allow to restart command at different points of the pipeline. It is possible to redo a faster pipeline by using BAM files or PAIRS files as starting points. You can restart the pipeline with a different number of iterations of the louvain algorithm. Here we will restart the pipeline at the PAIRS level.
 
 
@@ -193,52 +182,10 @@ done
 
 MetaTOR use the software miComplete to validate MAGs and to select MAGs that need to be cleaned through a recursive process of the algorithm. Indeed, in very large network (which is not the case here), the algorithm suffer from resolution limits and need sometimes to be re-run on sub-network. The software is a bit less precise than CheckM but is really faster and less memory consuming. Generally, at the end of the pipeline, we use CheckM or GTDB-tk to assess properly the quality of the retrieved MAGs and annotate them.
 
-You will find the complete output files obtained using the whole dataset (around 90 Millions of PE reads) at the following path:
-
-```sh
-ls -l Tuto_MetaTOR/metator_final/
-```
-
-## Mobile genetic elements binning
-
-metator also allow to bin MGE based on their contact. the module can be called like that 
-
-```sh
-metator mge --help
-```
-
-the first step is to select the contigs you want to target and to generate a fasta files with these contigs. You will find in the directory [Tuto_MetaTOR/data/mock_genomad/] the output of geNomad on the mock community assembly.
-
-```sh
-mkdir Tuto_MetaTOR/metamge/
-cat Tuto_MetaTOR/data/mock_genomad/mock_plasmid_summary.tsv| sed '1d' | awk '{print $1}' > Tuto_MetaTOR/metamge/target_mge.txt
-cat Tuto_MetaTOR/data/mock_genomad/mock_virus_summary.tsv| sed '1d' | awk '{print $1}' >> Tuto_MetaTOR/metamge/target_mge.txt
-cat Tuto_MetaTOR/data/mock_genomad/mock_plasmid.fna Tuto_MetaTOR/data/mock_genomad/mock_virus.fna > Tuto_MetaTOR/metamge/target_mge.fa
-```
-
-then can launch the module
-
-```sh
-metator mge --network Tuto_MetaTOR/metator_final/network.txt --fasta Tuto_MetaTOR/metamge/target_mge.fa --mges Tuto_MetaTOR/metamge/target_mge.txt --plot --binning Tuto_MetaTOR/metator_final/binning.txt --outdir Tuto_MetaTOR/metamge/ --threads 2 --contigs-data Tuto_MetaTOR/metator_final/contig_data_final.txt Tuto_MetaTOR/metator_final/alignment_sorted.pairs.gz
-```
 
 ## 3D Analysis
 
 3C data and MetaTOR (by it connection with our software hicstuff) also allow to generate contact matrices of various genomic object (contigs, bin, MAG, overlapping MAGs). However, i jsut realize that the last version of a package is no more compatible with our pipeline :(((
-
-we have to downgrade the hicstuff package ... i hope this won't destroy everything !! 
-
-```sh
-pip install --force-reinstall -v "hicstuff==2.3.1"
-```
-
-and we also have to install a package not included in this version of hicstuff
-
-```sh
-pip install cooler
-```
-
-ok ... everything should be ok now and we can start playing with the contact map !!
 
 the command follow the following rules:
 
