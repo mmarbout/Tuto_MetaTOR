@@ -200,7 +200,7 @@ mkdir -p Tuto_MetaTOR/contact_map/
 
 
 ```sh
-metator contactmap -a Tuto_MetaTOR/assembly/assembly_mock.fa -c Tuto_MetaTOR/MetaTORl/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR/contact_map/ -O contig -F -f -e HinfI,DpnII Tuto_MetaTOR/MetaTOR/alignment_sorted.pairs.gz
+metator contactmap -a Tuto_MetaTOR/assembly/assembly_mock.fa -c Tuto_MetaTOR/metator_final/contig_data_final.txt -n "NODE_1078_len_298687" -o Tuto_MetaTOR/contact_map/ -O contig -F -f -e HinfI,DpnII Tuto_MetaTOR/metator_final/alignment_0_sorted.pairs.gz
 ```
 
 by re-using the command, generate a contact map of the most covered or longest contig, the most covered or largest MAG .. etc .. (all the data you need are present in the repertory with the different output files [Tuto_MetaTOR/MetaTOR]). Be carefull to change the name of the output directory !!!!
@@ -222,7 +222,7 @@ hicstuff rebin --help
  here is example of a command line to rebin a contactmap to 10kb
 
 ```sh
-hicstuff rebin -b 10kb -f Tuto_MetaTOR/contact_map/NODE_1078_len_298687.frags.tsv -c Tuto_MetaTOR/contact_map/NODE_1078_len_298687.chr.tsv Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.mat.tsv Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687_10kb
+hicstuff rebin -b 10kb -f Tuto_MetaTOR/contact_map/NODE_1078_len_298687.frags.tsv -c Tuto_MetaTOR/contact_map/NODE_1078_len_298687.chr.tsv Tuto_MetaTOR/contact_map_1/NODE_1078_len_298687.mat.tsv Tuto_MetaTOR/contact_map/NODE_1078_len_298687_10kb
 ```
 
 another command of the hicstuff pipeline allow to directly rebin a matrix and generate a image file of the contact map
