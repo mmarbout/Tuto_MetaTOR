@@ -133,7 +133,7 @@ metator pipeline --help
 ```
 
 ```sh
-metator pipeline -F -i 10 -a Tuto_MetaTOR/assembly/assembly_mock.fa -1 Tuto_MetaTOR/FastQ/lib1_3C_R1.fq.gz -2 Tuto_MetaTOR/FastQ/lib1_3C_R2.fq.gz -o Tuto_MetaTOR/out_MetaTOR/
+metator pipeline -F -i 10 -j 3 -a Tuto_MetaTOR/assembly/assembly_mock.fa -1 Tuto_MetaTOR/FastQ/lib1_3C_R1.fq.gz -2 Tuto_MetaTOR/FastQ/lib1_3C_R2.fq.gz -o Tuto_MetaTOR/out_MetaTOR/
 ```
 
 NB: The option [-F] is mandatory if the putput directory already exist.
@@ -164,7 +164,7 @@ MetaTOR allow to restart command at different points of the pipeline. It is poss
 
 
 ```sh
-metator pipeline -F -i 10 -j 3 --start pair -1 Tuto_MetaTOR/out_MetaTOR/alignment_0_sorted.pairs.gz -a Tuto_MetaTOR/assembly/assembly_mock.fa -o Tuto_MetaTOR/out_MetaTOR_2/
+metator pipeline -F -i 5 -j 3 --start pair -1 Tuto_MetaTOR/out_MetaTOR/alignment_0_sorted.pairs.gz -a Tuto_MetaTOR/assembly/assembly_mock.fa -o Tuto_MetaTOR/out_MetaTOR_2/
 ```
 
 We can also make different number of iterations of the louvain algorithm in order to see the variations in the provided output.
@@ -173,7 +173,7 @@ We can also make different number of iterations of the louvain algorithm in orde
 for it in $(seq 1 2 9)
 do
 echo "number of iterations:""$it"
-metator pipeline -v -F -i "$it" --start pair -1 Tuto_MetaTOR/out_MetaTOR/alignment_0_sorted.pairs.gz -a Tuto_MetaTOR/assembly/assembly_mock.fa -o Tuto_MetaTOR/out_MetaTOR_it"$it"/
+metator pipeline  -F -i "$it" -j 3 --start pair -1 Tuto_MetaTOR/out_MetaTOR/alignment_0_sorted.pairs.gz -a Tuto_MetaTOR/assembly/assembly_mock.fa -o Tuto_MetaTOR/out_MetaTOR_it"$it"/
 echo "FINITO"
 echo ""
 done
@@ -181,8 +181,6 @@ done
 
 
 MetaTOR use the software miComplete to validate MAGs and to select MAGs that need to be cleaned through a recursive process of the algorithm. Indeed, in very large network (which is not the case here), the algorithm suffer from resolution limits and need sometimes to be re-run on sub-network. The software is a bit less precise than CheckM but is really faster and less memory consuming. Generally, at the end of the pipeline, we use CheckM or GTDB-tk to assess properly the quality of the retrieved MAGs and annotate them.
-
-you will find in the directory [MetaTOR] the classical output of MetaTOR. 
 
 ## 3D Analysis
 
@@ -266,17 +264,44 @@ The cooler file format is an implementation of a genomic matrix data model using
 
 [cooler](https://github.com/open2c/cooler)
 
-## MGE binning
+## MGE binning and Host-Association
 
-metator will soon encompass two new modules (still in construction for a good integration) metator mge and metator host that allow to perform binning of MGE annotated contigs and associate them to their host.
+### MGE Binning
 
-the new version should be released soon ... 
+metator encompass two new modules (still in construction for a good integration) metator mge and metator host that allow to perform binning of MGE annotated contigs and associate them to their host.
+
+the new version should be released soon ...
 
 in case you want to have a look at it development and what we have done with it:
 
 [Phages with a broad host range are common across ecosystems](https://pasteur.hal.science/pasteur-05269627v1)
 
+to perform MGE binning, you first need a file encompassing the contigs annotated as MGEs.
+you will find this file here: 
 
+```sh
+cat Tuto_MetaTOR/metator_final/contig_mge.txt | head
+```
+
+these contigs have been categorized using geNomad.
+we can launch the mge module:
+
+```sh
+metator mge -h
+```
+
+```sh
+metator mge -h
+```
+ 
+### MGE Host association (module in construction)
+
+this module is still under development to integrate well in the whole pipeline 
+you will find in the directory [metator_final] the different important outputfiles of the whole pipeline 
+
+```sh
+ls Tuto_MetaTOR/metator_final/
+```
 
 ## References
 
