@@ -57,7 +57,10 @@ tar -xvf Tuto_MetaTOR.tar.gz
 ```
 
 
-The folder contain the FastQ files correzsponding to the Hi-C library of the mock community, the FastA files of the assembly and others folder we will use later.
+The folder contain three folder:
+* FastQ: the FastQ files corresponding to the Hi-C library of the mock community.
+* assembly: the FastA files of the assembly.
+* metator_final: different files of the final ouput.
 
 ```sh
 ls -l Tuto_MetaTOR/
@@ -129,16 +132,15 @@ using the provided dataset, you can launch the whole pipeline.
 metator pipeline --help
 ```
 
-this commands will take some time (30 min) due to the small configuration of your VM...
-
 ```sh
-metator pipeline -v -F -i 10 -a Tuto_MetaTOR/assembly/assembly_mock.fa -1 Tuto_MetaTOR/FastQ/lib1_3C_R1.fq.gz -2 Tuto_MetaTOR/FastQ/lib1_3C_R2.fq.gz -o Tuto_MetaTOR/out_MetaTOR/
+metator pipeline -F -i 10 -a Tuto_MetaTOR/assembly/assembly_mock.fa -1 Tuto_MetaTOR/FastQ/lib1_3C_R1.fq.gz -2 Tuto_MetaTOR/FastQ/lib1_3C_R2.fq.gz -o Tuto_MetaTOR/out_MetaTOR/
 ```
 
 NB: The option [-F] is mandatory if the putput directory already exist.
 
+this commands can take some time ...
 
-MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis. You will find the complete output in the [metator] folder..
+MetaTOR will provide you with various metrics about the whole pipeline. It will also generate different files necessary for downstream analysis. 
 
 ```sh
 ls -l Tuto_MetaTOR/out_MetaTOR/
@@ -162,7 +164,7 @@ MetaTOR allow to restart command at different points of the pipeline. It is poss
 
 
 ```sh
-metator pipeline -v -F -i 10 --start pair -1 Tuto_MetaTOR/out_MetaTOR/alignment_0_sorted.pairs.gz -a Tuto_MetaTOR/assembly/assembly_mock.fa -o Tuto_MetaTOR/out_MetaTOR_2/
+metator pipeline -F -i 10 -j 3 --start pair -1 Tuto_MetaTOR/out_MetaTOR/alignment_0_sorted.pairs.gz -a Tuto_MetaTOR/assembly/assembly_mock.fa -o Tuto_MetaTOR/out_MetaTOR_2/
 ```
 
 We can also make different number of iterations of the louvain algorithm in order to see the variations in the provided output.
