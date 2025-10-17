@@ -291,7 +291,7 @@ metator mge -h
 ```
 
 ```sh
-metator mge -h
+metator mge -c Tuto_MetaTOR/metator_final/contig_data_final.txt -a Tuto_MetaTOR/assembly/assembly_mock.fa -b Tuto_MetaTOR/metator_final/binning.txt -m Tuto_MetaTOR/metator_final/contig_mge.txt -o Tuto_MetaTOR/MGE_out Tuto_MetaTOR/metator_final/alignment_0_sorted.pairs.gz
 ```
  
 ### MGE Host association (module in construction)
