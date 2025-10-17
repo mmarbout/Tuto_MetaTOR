@@ -272,7 +272,7 @@ metator encompass two new modules (still in construction for a good integration)
 
 the new version should be released soon ...
 
-in case you want to have a look at it development and what we have done with it:
+in case you want to have a look at its development and what we have done with it:
 
 [Phages with a broad host range are common across ecosystems](https://pasteur.hal.science/pasteur-05269627v1)
 
@@ -300,8 +300,9 @@ this module is still under development to integrate well in the whole pipeline
 you will find in the directory [metator_final] the different important outputfiles of the whole pipeline 
 
 ```sh
-ls Tuto_MetaTOR/metator_final/
+ls Tuto_MetaTOR/metator_final/mge/
 ```
+
 
 ## References
 
