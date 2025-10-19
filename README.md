@@ -39,18 +39,13 @@ In this analysis, we will use a simple metagenomic dataset with a defined commun
 
 the different data for the tutorial need to be copied on your VM from the public space:
 
-option 1 - data are available on the public partition storage of your VM
+data are available on the public partition storage of your VM
 
 ```sh
-cp  -r /ifb/data/public/teachdata/ebame/MetaTOR ./
+cp  /ifb/data/public/teachdata/ebame/MetaTOR-2025/Tuto_MetaTOR.tar.gz ./
 ```
 
-option 2 - data can be downloaded here (longer)
-
-```sh
-wget https://dl.pasteur.fr/fop/h5SOGD04/Tuto_MetaTOR.tar.gz
-```
- and they also need to be decompressed
+they need to be decompressed
 
  ```sh
 tar -xvf Tuto_MetaTOR.tar.gz
